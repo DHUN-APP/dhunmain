@@ -1,12 +1,14 @@
 # [Dhun](https://dhunmusicapp.web.app/)
-
+## <p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
 ![2](https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19)
 
 - This is a Online Music gallary
 - ReactJs 
 - Database & Hosting : Firebase
+- 
 
 # Built With
+
 <p>
 <img alt="Javascript" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"  height="25px"/>
 <img alt="React" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" height="25px"/>
@@ -24,10 +26,11 @@
 <img alt="github actions" src="https://img.shields.io/badge/-Github_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white" height="25px"/>
 <img alt="postman" src="https://img.shields.io/badge/-Postman-00C7B7?style=flat-square&logo=postman&logoColor=white" height="25px"/>
 </p>
+
 # Features
 
 - 📖 Multi-Page Layout
 
-- 🎨 Styled with React-Bootstrap and Css with easy to customize colors
+- 🎨 Styled with React-Taiwind and Css with easy to customize colors
 
 - 📱 Fully Responsive  
