@@ -2,14 +2,7 @@
 
 ![2](https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19)
 
-<div style="display: flex; align-items: center;">
-  <div style="flex: 1;">
-    <img src="https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19" alt="Description of image" style="max-width: 100%;">
-  </div>
-  <div style="flex: 2; padding-left: 20px;">
-    <p> <p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p></p>
-  </div>
-</div>
+<p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
 
 
 - ## This is a Online Music gallary
