@@ -5,7 +5,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { useNavigate, Link } from 'react-router-dom';
 import LocalLoader from '../Loders/LocalLoader'
-
+import Engine from '../Faltu/Engine';
 
 const Home = () => {
   const { user, userId, logout } = useAuth();
@@ -65,6 +65,7 @@ const Home = () => {
         </div>
       )}
       <Link to="/" className="p-2 w-[400px] bg-slate-400 mt-5 flex items-center justify-center font-semibold text-xl rounded-lg" onClick={handleLogout}>Logout</Link>
+      <Engine></Engine>
     </div>
   );
 };
