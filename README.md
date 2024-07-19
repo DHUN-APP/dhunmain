@@ -2,10 +2,10 @@
 ## <p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
 ![2](https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19)
 
-- This is a Online Music gallary
-- ReactJs 
-- Database & Hosting : Firebase
-- 
+- ## This is a Online Music gallary
+- ## ReactJs 
+- ## Database & Hosting : Firebase
+  
 
 # Built With
 
