@@ -1,0 +1,46 @@
+input[type=date]::-webkit-datetime-edit-text {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-month-field{
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-day-field {
+    -webkit-appearance: none;
+    display: none;
+}
+input[type=date]::-webkit-datetime-edit-year-field {
+    -webkit-appearance: none;
+    display: none;
+}
+
+/* Custom CSS to hide the scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+  
+  /* Highlight background color for selected artist cards */
+  .bg-highlight {
+    background-color:#09204d;  
+  }
+    
+  .transition-colors {
+    transition: all 0.3s ease-in-out;
+  }
+    
+  .border-gray-200 {
+    border-color: #e5e7eb; 
+  }
+  .bg-white {
+    background-color:transparent; /* Default white background */
+  }
+  
+  .text-primarycolor {
+    color: #007bff; /* Primary color for selected text */
+  }
+  
