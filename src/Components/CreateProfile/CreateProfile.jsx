@@ -4,6 +4,7 @@ import PersonalDetails from './PersonalDetails';
 import SelectGenres from './SelectGenres';
 import SelectArtists from './SelectArtists';
 import SelectPlan from './SelectPlan';
+import SelectPlaylists from './SelectPlaylist';
 
 const CreateProfile = () => {
     const {section} = useParams();
@@ -14,7 +15,9 @@ const CreateProfile = () => {
           case "genres":
             return <SelectGenres />;
           case "artists":
-            return <SelectArtists />;
+            return <SelectArtists />;         
+          case "playlist":
+            return <SelectPlaylists/>;         
           case "plan":
             return <SelectPlan/>
           default:
