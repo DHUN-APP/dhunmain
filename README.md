@@ -37,7 +37,7 @@ Share playlists and favorite tracks with friends, follow other users, and see wh
 <table>
   <tr>
     <td align="center"><a href="https://github.com/Arnab-Koley"><img src="https://avatars.githubusercontent.com/u/93140569?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Arnab Koley</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Tanmoy-Santra"><img src="https://avatars.githubusercontent.com/u/123796923?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Tanmoy Santra 1</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Tanmoy-Santra"><img src="https://avatars.githubusercontent.com/u/123796923?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Tanmoy Santra</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/SouvikHazra060"><img src="https://avatars.githubusercontent.com/u/132296054?v=4" width="100px;" alt=""/><br /><sub><b>Souvik Hazra</b></sub></a><br /></td> 
     <td align="center"><a href="https://github.com/Soumyajit-Koley009"><img src="https://avatars.githubusercontent.com/u/162975230?v=4" width="100px;" alt=""/><br /><sub><b>Soumyajit Koley</b></sub></a><br /></td> 
     <td align="center"><a href="https://github.com/team-member-4"><img src="https://avatars.githubusercontent.com/u/team-member-4?v=4" width="100px;" alt=""/><br /><sub><b>Manas Dig</b></sub></a><br /></td> 
