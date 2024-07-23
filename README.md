@@ -1,22 +1,16 @@
-# [Dhun](https://dhunmusicapp.web.app/)
+# 🎵 [Dhun - Music App](https://dhunmusicapp.web.app/)
+
+_**Stream your favorite songs, create playlists, and explore new music**_ <br />
 
 ![2](https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19)
 
  <p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
 
 
--  This is a Online Music gallary
--  ReactJs 
--  Database & Hosting : Firebase
-
-
 [![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
 
-# 🎵 _Dhun - Music App _
-
-_**Stream your favorite songs, create playlists, and explore new music**_ <br />
 
 ### 🎯 Our Goals:
 
