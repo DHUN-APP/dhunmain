@@ -7,10 +7,6 @@ _**Stream your favorite songs, create playlists, and explore new music**_ <br />
 
 <p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
 
-[![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
-
 ### 🎯 Our Goals:
 
 1. Provide a seamless music streaming experience.
@@ -40,11 +36,11 @@ Share playlists and favorite tracks with friends, follow other users, and see wh
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/your-github-profile"><img src="https://avatars.githubusercontent.com/u/your-github-profile?v=4" width="100px;" alt=""/><br /><sub><b>Your Name</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/team-member-1"><img src="https://avatars.githubusercontent.com/u/team-member-1?v=4" width="100px;" alt=""/><br /><sub><b>Team Member 1</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/team-member-2"><img src="https://avatars.githubusercontent.com/u/team-member-2?v=4" width="100px;" alt=""/><br /><sub><b>Team Member 2</b></sub></a><br /></td> 
-    <td align="center"><a href="https://github.com/team-member-3"><img src="https://avatars.githubusercontent.com/u/team-member-3?v=4" width="100px;" alt=""/><br /><sub><b>Team Member 3</b></sub></a><br /></td> 
-    <td align="center"><a href="https://github.com/team-member-4"><img src="https://avatars.githubusercontent.com/u/team-member-4?v=4" width="100px;" alt=""/><br /><sub><b>Team Member 4</b></sub></a><br /></td> 
+    <td align="center"><a href="https://github.com/Arnab-Koley"><img src="https://avatars.githubusercontent.com/u/93140569?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Arnab Koley</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Tanmoy-Santra"><img src="https://avatars.githubusercontent.com/u/123796923?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Tanmoy Santra 1</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/SouvikHazra060"><img src="https://avatars.githubusercontent.com/u/132296054?v=4" width="100px;" alt=""/><br /><sub><b>Souvik Hazra</b></sub></a><br /></td> 
+    <td align="center"><a href="https://github.com/Soumyajit-Koley009"><img src="https://avatars.githubusercontent.com/u/162975230?v=4" width="100px;" alt=""/><br /><sub><b>Soumyajit Koley</b></sub></a><br /></td> 
+    <td align="center"><a href="https://github.com/team-member-4"><img src="https://avatars.githubusercontent.com/u/team-member-4?v=4" width="100px;" alt=""/><br /><sub><b>Manas Dig</b></sub></a><br /></td> 
   </tr>
 </table>
 
