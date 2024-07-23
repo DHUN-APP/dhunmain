@@ -1,14 +1,48 @@
-# [Dhun](https://dhunmusicapp.web.app/)
 
-![2](https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19)
+# 🎵 [Dhun - Music App](https://dhunmusicapp.web.app/)
 
- <p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
+_**Stream your favorite songs, create playlists, and explore new music**_ <br />
 
+<img src="https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19" alt="Dhun" width="200" align="right"/>
 
--  This is a Online Music gallary
--  ReactJs 
--  Database & Hosting : Firebase
-  
+<p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
+
+### 🎯 Our Goals:
+
+1. Provide a seamless music streaming experience.
+2. Enable users to create and manage playlists.
+3. Allow users to explore music by different artists and genres.
+4. Ensure user data is securely stored and managed with Firebase.
+5. Incorporate social features to share music and playlists.
+
+## 📝 Project Description
+
+_📌 **Stream Music Anytime, Anywhere**_ <br/>
+Users can stream their favorite songs from a vast library, access curated playlists, and discover new music based on their listening preferences.
+
+_📌 **Create and Manage Playlists**_ <br/>
+Users can create, edit, and manage their own playlists, making it easy to organize their favorite tracks.
+
+_📌 **Explore Artists and Genres**_ <br/>
+Browse through a wide selection of artists and genres, view artist profiles, and explore their discographies.
+
+_📌 **Secure User Authentication and Data Management**_ <br/>
+Utilize Firebase for secure user authentication and data management, ensuring user information and preferences are safely stored.
+
+_📌 **Social Features**_ <br/>
+Share playlists and favorite tracks with friends, follow other users, and see what your friends are listening to.
+
+## 👨‍💻 Team Members ✨
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Arnab-Koley"><img src="https://avatars.githubusercontent.com/u/93140569?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Arnab Koley</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Tanmoy-Santra"><img src="https://avatars.githubusercontent.com/u/123796923?s=64&v=4" width="100px;" alt=""/><br /><sub><b>Tanmoy Santra</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/SouvikHazra060"><img src="https://avatars.githubusercontent.com/u/132296054?v=4" width="100px;" alt=""/><br /><sub><b>Souvik Hazra</b></sub></a><br /></td> 
+    <td align="center"><a href="https://github.com/Soumyajit-Koley009"><img src="https://avatars.githubusercontent.com/u/162975230?v=4" width="100px;" alt=""/><br /><sub><b>Soumyajit Koley</b></sub></a><br /></td> 
+    <td align="center"><a href="https://github.com/team-member-4"><img src="https://avatars.githubusercontent.com/u/team-member-4?v=4" width="100px;" alt=""/><br /><sub><b>Manas Dig</b></sub></a><br /></td> 
+  </tr>
+</table>
 
 # Built With
 
@@ -33,7 +67,5 @@
 # Features
 
 - 📖 Multi-Page Layout
-
-- 🎨 Styled with React-Taiwind and Css with easy to customize colors
-
+- 🎨 Styled with React-Tailwind and CSS with easy to customize colors
 - 📱 Fully Responsive  
