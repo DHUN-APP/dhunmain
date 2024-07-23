@@ -4,7 +4,7 @@ import PersonalDetails from './PersonalDetails';
 import SelectGenres from './SelectGenres';
 import SelectArtists from './SelectArtists';
 import SelectPlan from './SelectPlan';
-import SelectPlaylists from './SelectPlaylist';
+import SelectPlaylists from './SelectPlaylists';
 
 const CreateProfile = () => {
     const {section} = useParams();

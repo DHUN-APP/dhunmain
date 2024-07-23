@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../../../firebase-config'; 
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useAuth } from '../../Context/AuthContext'; 
-import UniversalLoader from '../Loders/UniversalLoader';
+import UniversalLoader from '../Loaders/UniversalLoader';
 
 const PersonalDetails = () => {
   const [isLoading , setIsLoading]=useState(true);
@@ -43,7 +43,6 @@ const PersonalDetails = () => {
         dob,
         gender
       }, { merge: true });
-      alert('Personal details submitted successfully!');
       navigate('/createprofile/genres'); // Navigate to the next page after successful update
     } catch (e) {
       console.error('Error updating document: ', e);
@@ -59,45 +58,47 @@ const PersonalDetails = () => {
 
   return (
     <div className='w-full h-screen flex flex-col items-center justify-center'>
-      <h1 className='text-3xl text-textcolor font-bold my-5'>Personal Details</h1>
-      <form className='flex flex-col items-center space-y-4' onSubmit={handleSubmit}>
+      <h1 className='text-3xl text-textcolor font-bold mb-5'>Enter Personal Details</h1>
+      <form className='flex flex-col items-center w-[300px] max-md:w-[80%] border-2 p-5 rounded-lg border-textcolor mt-8' onSubmit={handleSubmit}>
+      <h1 className='w-full flex justify-start mb-1 text-textcolor text-xl font-semibold'>Name :</h1>
         <input 
           type="text" 
           placeholder="Name" 
-          className='border-2 border-primarycolor rounded-lg px-3 py-1'
+          className='outline-none rounded-lg px-3 py-1 w-full font-semibold'
           value={name} 
           onChange={(e) => setFirstName(e.target.value)}            
-        />       
+        />
+        <h1 className='w-full flex justify-start mb-1 mt-5 text-textcolor text-xl font-semibold'>DOB :</h1>       
         <div className='relative w-full'>
           <input 
             type="date"
             value={dob}
             onChange={(e) => setDob(e.target.value)} 
-            className='border-2 border-primarycolor rounded-lg px-3 py-1 w-full appearance-none'
+            className='outline-none rounded-lg px-3 py-1 w-full text-black appearance-none font-semibold'
             min="1920-01-01"
             max={today}
             required 
           />
           <div className='absolute top-1/2 transform -translate-y-1/2 left-3 pointer-events-none'>
-            <span className='text-gray-500'>
+            <span className='text-black font-semibold'>
               {dob === '' ? 'DOB' : `${dob}`}
             </span>
           </div>
         </div>
+        <h1 className='w-full flex justify-start mb-1 mt-5 text-textcolor text-xl font-semibold'>Gender :</h1>
         <select 
-          className='border-2 border-primarycolor rounded-lg px-3 py-1 w-full'
+          className='outline-none rounded-lg px-3 py-1 w-full font-semibold'
           value={gender}
           onChange={(e) => setGender(e.target.value)}
           required
         >
-          <option value="" disabled>Choose Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
         </select>
         <button 
           type="submit" 
-          className='text-2xl text-textcolor font-semibold border-2 border-primarycolor rounded-lg px-5 py-1 mt-5'
+          className='text-2xl w-full font-semibold  rounded-lg px-5 py-1 mt-10 bg-textcolor text-primarybg'
         >
           Next
         </button>

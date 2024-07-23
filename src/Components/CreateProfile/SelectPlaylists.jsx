@@ -4,7 +4,11 @@ import { useAuth } from '../../Context/AuthContext';
 import { db } from '../../../firebase-config'; 
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import UniversalLoader from '../Loders/UniversalLoader';
+import UniversalLoader from '../Loaders/UniversalLoader';
+import playlistsdata from '../../Data/playlistdata';
+import { UisCheckCircle } from '@iconscout/react-unicons-solid'
+import { UilArrowRight } from '@iconscout/react-unicons'
+import { toast} from 'react-toastify';
 
 const SelectPlaylists = () => {
   const { userId } = useAuth();
@@ -12,19 +16,6 @@ const SelectPlaylists = () => {
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylists, setSelectedPlaylists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const playlistIds = [
-    '37i9dQZF1DXbVhgADFy3im', '37i9dQZEVXbLZ52XmnySJg', '2UZk7JjJnbTut1w8fqs3JL',
-    '7u5HFFZFpY6s7EnwQrcWT1', '37i9dQZF1DXdcRZAcc2QFU', '37i9dQZF1DWSKoG4oVafMt',
-    '4nZo2X8iHrwhYBYdKvysgI', '04XmY48AWVmJQSE7tIYFIX', '37i9dQZF1DX14CbVHtvHRB',
-    '37i9dQZF1DWTt3gMo0DLxA', '37i9dQZF1DWYztMONFqfvX', '0ldH4ltKERLCOH3zsEcQm0',
-    '7cKHa9eQ8k7ATPHGpdKgqf', '1EN91xJtYSDCJtjn9t0iww', '37i9dQZF1DWYRTlrhMB12D',
-    '4aQsjBuSIy3yUs8w6I2OQr', '2kt4w2RvD9YcpSq0R20r1V', '37i9dQZF1DWTqYqGLu7kTX',
-    '37i9dQZF1DX5q67ZpWyRrZ', '2C2EDk8SiMQXG8hcuo0ohj', '4CuO7c8KnGI6LSrmFMIJI2',
-    '0nG8Qgy8jOyT5M40mKAkYo', '0Zc2UHPeuEoqHWtnrc4Rki', '3f8aJGjwqOqz9qOV6j7WL6',
-    '6je4qaBiNqjgxYdq6g1ABc', '623yWLpwYSKgdHVuub7Li0', '07wqTTsUAUEaHwVZB5sCKP',
-    '3qpz8558OZHHhyu03ksdyE', '4Np9pMSyvsJ5krSH3dI5vC', '6qLwtAC2GKd12TCfH4X5Jy'
-  ];
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -41,7 +32,7 @@ const SelectPlaylists = () => {
         const token = tokenResponse.data.access_token;
 
         // Fetch playlists by IDs
-        const playlistPromises = playlistIds.map(id =>
+        const playlistPromises = playlistsdata.map(id =>
           axios.get(`https://api.spotify.com/v1/playlists/${id}`, {
             headers: { 'Authorization': 'Bearer ' + token }
           })
@@ -71,18 +62,20 @@ const SelectPlaylists = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (selectedPlaylists.length < 3) {
-      alert('Please choose at least 3 playlists.');
+      toast.error('Select at least 3 playlists !', { position: "top-center", toastId: 'welcome-toast'});
       return;
     }
     try {
+      setIsLoading(true);
       const userDocRef = doc(db, 'users', userId);
       await setDoc(userDocRef, {
         playlists: selectedPlaylists
       }, { merge: true });
-      alert('Playlists saved successfully!');
       navigate('/createprofile/plan'); // Adjust navigation as needed
     } catch (error) {
       console.error('Error saving playlists:', error);
+    } finally{
+      setIsLoading(false);
     }
   };
 
@@ -91,25 +84,32 @@ const SelectPlaylists = () => {
   }
 
   return (
-    <div className='w-full h-screen flex flex-col items-center justify-center overflow-auto p-4'>
-      <h1 className='text-3xl text-textcolor font-bold my-5'>Select Your Favorite Playlists</h1>
-      <div className='w-full h-[80vh] overflow-y-scroll scrollbar-hide grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4'>
+    <div className='w-full h-screen flex flex-col items-center overflow-y-scroll scrollbar-hide'>
+      <h1 className='text-3xl max-md:text-xl max-md:border-2 max-md:px-5 max-md:mb-6 text-textcolor font-bold mt-14 mb-8 border-4 border-primarycolor px-10 flex justify-center rounded-full py-2 '>Select Your Favorite Playlists</h1>
+
+      <ul className='w-full flex flex-wrap justify-center mb-[150px]'>
         {playlists.map(playlist => (
-          <div
+          <li
             key={playlist.id}
-            className={`border-2 rounded-lg p-2 cursor-pointer transition-colors duration-300 ease-in-out ${selectedPlaylists.includes(playlist.id) ? 'border-primarycolor bg-highlight text-primarycolor' : 'border-gray-200 bg-transparent text-textcolor'}`}
+            className={`shadow-lg shadow-black border-2 rounded-xl m-3 h-[310px] max-md:h-[240px] w-[200px] max-md:w-[150px] flex flex-col text-center cursor-pointer transition-colors duration-300 ease-in-out ${selectedPlaylists.includes(playlist.id) ? ' bg-highlight' : 'bg-transparent'}`}
             onClick={() => handlePlaylistSelect(playlist.id)}
           >
-            <img src={playlist.images[0]?.url} alt={playlist.name} className='w-full h-32 object-fit rounded-lg mb-2' />
-            <p className='text-md font-semibold'>{playlist.name}</p>
-          </div>
+            <div className='h-[15%] w-full flex items-center rounded-t-xl px-2 py-1'>
+              <div className={`flex w-full justify-end ${selectedPlaylists.includes(playlist.id) ? '' : 'hidden'}`}>
+                <UisCheckCircle size={30} color="white" />
+              </div>
+            </div>
+            <div className='h-[65%]'><img src={playlist.images[0]?.url} alt={playlist.name} className='h-[200px] w-[200px] max-md:h-[150px] max-md:w-[150px]' /></div>
+            <p className=' text-textcolor rounded-b-xl h-[20%] items-center max-md:text-sm  text-md font-semibold w-full flex p-2 justify-center'>{playlist.name}</p>
+          </li>
         ))}
-      </div>
+        </ul>
       <button 
         onClick={handleSubmit}
-        className='text-2xl text-textcolor font-semibold border-2 border-primarycolor rounded-lg px-5 py-1 mt-5'
+        className='text-xl flex bg-primarycolor py-2 px-5 rounded-full font-bold my-14 absolute bottom-0 shadow-md shadow-black'
       >
         Next
+        <UilArrowRight size={30} color="black"/>
       </button>
     </div>
   );

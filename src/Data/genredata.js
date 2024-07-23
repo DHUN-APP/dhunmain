@@ -1,0 +1,35 @@
+
+  const genresdata = [
+  { id: '0JQ5DAqbMKFz6FAsUtgAab', color: "#608108", imgPath: "/assets/images/genre/New_releases.jpeg"},
+  { id: '0JQ5DArNBzkmxXHCqFLx2J', color: "#006450", imgPath: "/assets/images/genre/Podcasts.jpeg"},
+  { id: '0JQ5DAqbMKFQIL0AXnG5AK', color: "#B02897", imgPath: "/assets/images/genre/Trending.jpeg"},
+  { id: '0JQ5DAqbMKFHCxg5H5PtqW', color: "#DC148C", imgPath: "/assets/images/genre/Hindi.jpeg"},
+  { id: '0JQ5DAqbMKFKSopHMaeIeI', color: "#B02897", imgPath: "/assets/images/genre/Punjabi.jpeg"},
+  { id: '0JQ5DAqbMKFQ00XGBls6ym', color: "#477D95", imgPath: "/assets/images/genre/Hip_Hop.jpeg"},
+  { id: '0JQ5DAqbMKFE33XAyDiPIr', color: "#A56752", imgPath: "/assets/images/genre/Tamil.jpeg"},
+  { id: '0JQ5DAqbMKFIdOwkMWR5at', color: "#BA5D07", imgPath: "/assets/images/genre/Telugu.jpeg"},
+  { id: '0JQ5DAqbMKFAUsdyVjCQuL', color: "#DC148C", imgPath: "/assets/images/genre/Love.jpeg"},
+  { id: '0JQ5DAqbMKFA6SOHvT3gck', color: "#8D67AB", imgPath: "/assets/images/genre/Party.jpeg"},
+  { id: '0JQ5DAqbMKFEC4WFtoNRpw', color: "#477D95", imgPath: "/assets/images/genre/Pop.jpeg"},
+  { id: '0JQ5DAqbMKFAJ5xb0fwo9m', color: "#8D67AB", imgPath: "/assets/images/genre/Jazz.jpeg"},
+  { id: '0JQ5DAqbMKFKtQGjXD19nw', color: "#477D95", imgPath: "/assets/images/genre/Malayalam.jpeg"},
+  { id: '0JQ5DAqbMKFB7mJpXZv2vV', color: "#E13300", imgPath: "/assets/images/genre/Bhojpuri.jpeg"},
+  { id: '0JQ5DAqbMKFDXXwE9BDJAr', color: "#006450", imgPath: "/assets/images/genre/Rock.jpeg"},
+  { id: '0JQ5DAqbMKFAEu5QlAkwvV', color: "#7D4B32", imgPath: "/assets/images/genre/Indian_Classical.jpeg"},
+  { id: '0JQ5DAqbMKFEcBibYcDrCH', color: "#777777", imgPath: "/assets/images/genre/Ghazals.jpeg"},
+  { id: '0JQ5DAqbMKFGvOw3O4nLAf', color: "#E61E32", imgPath: "/assets/images/genre/K-pop.jpeg"},
+  { id: '0JQ5DAqbMKFOTGtSOysEXE', color: "#C39687", imgPath: "/assets/images/genre/Devotional.jpeg"},
+  { id: '0JQ5DAqbMKFRieVZLLoo9m', color: "#537AA1", imgPath: "/assets/images/genre/Instrumental.jpeg"},
+  { id: '0JQ5DAqbMKFHOzuVTgTizF', color: "#477D95", imgPath: "/assets/images/genre/DanceElectronic.jpeg"},
+  { id: '0JQ5DAqbMKFPrEiAOxgac3', color: "#7D4B32", imgPath: "/assets/images/genre/Classical.jpeg"},
+  { id: '0JQ5DAqbMKFCWjUTdzaG0e', color: "#E91429", imgPath: "/assets/images/genre/Indie.jpeg"},
+  { id: '0JQ5DAqbMKFFzDl7qN9Apr', color: "#B06239", imgPath: "/assets/images/genre/Chill.jpeg"},
+  { id: '0JQ5DAqbMKFLVaM30PMBm4', color: "#27856A", imgPath: "/assets/images/genre/Summer.jpeg"},
+  { id: '0JQ5DAqbMKFAXlCG6QvYQ4', color: "#777777", imgPath: "/assets/images/genre/Workout.jpeg"},
+  { id: '0JQ5DAqbMKFAQy4HL4XU2D', color: "#0D72ED", imgPath: "/assets/images/genre/Travel.jpeg"},
+  { id: '0JQ5DAqbMKFCuoRTxhYWow', color: "#1E3264", imgPath: "/assets/images/genre/Sleep.jpeg"},
+  { id: '0JQ5DAqbMKFCbimwdOYlsl', color: "#A56752", imgPath: "/assets/images/genre/Focus.jpeg"},
+  { id: '0JQ5DAqbMKFy78wprEpAjl', color: "#BC5900", imgPath: "/assets/images/genre/Folk_&_Acoustic.jpeg"}
+];
+
+export default genresdata;

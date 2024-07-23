@@ -86,9 +86,9 @@ import { getDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 
 import { UilGoogle } from "@iconscout/react-unicons";
-import UniversalLoader from '../Components/Loders/UniversalLoader';
+import UniversalLoader from '../Components/Loaders/UniversalLoader';
 
-const AuthLogin = () => {
+const AuthLogin = ({setUserType}) => {
   const navigate = useNavigate();
   const { setUser, setUserId } = useAuth();
   const [isFirestoreLoading, setIsFirestoreLoading] = useState(false);
@@ -101,6 +101,7 @@ const AuthLogin = () => {
       if (storedUser && storedUserId) {
         setUser(storedUser);
         setUserId(storedUserId);
+        setUserType(localStorage.getItem('userType'));
         navigate('/home');
       }
     }
@@ -130,10 +131,14 @@ const AuthLogin = () => {
           userId: user.uid,
         });
         localStorage.setItem('autoLogin', 'true');
+        localStorage.setItem('userType', 'new');
+        setUserType('new');
         setIsFirestoreLoading(false);
         navigate('/createprofile/details');
       } else {
         localStorage.setItem('autoLogin', 'true');
+        localStorage.setItem('userType', 'old');
+        setUserType('old');
         setIsFirestoreLoading(false);
         navigate('/home');
       }

@@ -4,7 +4,11 @@ import { useAuth } from '../../Context/AuthContext';
 import { db } from '../../../firebase-config';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import UniversalLoader from '../Loders/UniversalLoader';
+import UniversalLoader from '../Loaders/UniversalLoader';
+import artistsdata from '../../Data/artistdata'
+import { UisCheckCircle } from '@iconscout/react-unicons-solid'
+import { UilArrowRight } from '@iconscout/react-unicons'
+import { toast} from 'react-toastify';
 
 const SelectArtists = () => {
   const { userId } = useAuth();
@@ -12,27 +16,6 @@ const SelectArtists = () => {
   const [artists, setArtists] = useState([]);
   const [selectedArtists, setSelectedArtists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const artistIds = [
-    '1wRPtKGflJrBx9BmLsSwlU', '4YRxDV8wJFPHPTeXepOstw', '1mYsTxnqsietFxj1OgoGbG',
-    '2FKWNmZWDBZR4dE5KX4plR', '6LEG9Ld1aLImEFEVHdWNSB', '5C1S9XwxMuuCciutwMhp5t',
-    '2cjQTf2J5yCaNY8qHpW855',
-    '72beYOeW2sb2yfcS4JsRvb', '4Ai0pGz6GhQavjzaRhPTvz', '5NHm4TU5Twz7owibYxJfFU',
-    '1mBydYMVBECdDmMfE2sEUO', '4zCH9qm4R2DADamUHMCa6O', '5wJ1H6ud777odtZl5gG507',
-    '5T2I75UlGBcWd5nVyfmL13', '7uIbLdzzSEqnX0Pkrb56cR', '0y59o4v8uw5crbN9M3JiL1',
-    '4fEkbug6kZzzJ8eYX6Kbbp', '4K6blSRoklNdpw4mzLxwfn', '0sSxphmGskGCKlwB9xa6WU',
-    '2oSONSC9zQ4UonDKnLqksx', '2GoeZ0qOTt6kjsWW4eA6LS', '0oOet2f43PA68X5RxKobEy',
-    '2jqTyPt0UZGrthPF4KMpeN', '63gvl4egwBtz2czz3aENGa', '2o4R2rK7FetH40HTv0SUWl',
-    '7o7doCwqft91WC690aglWC', '53XhwfbYqKCa1cC15pYq2q', '3Nrfpe0tUJi4K4DXYWgMUX',
-    '2fMqTqiTxUDlmcOEPaQSsx', '3gBKY0y3dFFVRqicLnVZYz', '6Mv8GjQa7LKUGCAqa9qqdb',
-    '45PG2L6Fh2XvYL4ONzpdoW', '1Oh5bPXjw5jreVFhKc4jux',
-    '4PULA4EFzYTrxYvOVlwpiQ', '70B80Lwx2sxti0M1Ng9e8K', '1dVygo6tRFXC8CSWURQJq2',
-    '3Isy6kedDrgPYoTS1dazA9', '6M2wZ9GZgrQXHCFfjv46we', '4V8Sr092TqfHkfAA5fXXqG',
-    '3TVXtAsR1Inumwj472S9r4', '06HL4z0CvFAxyc27GXpf02', '4q3ewBCX7sLwd24euuV69X',
-    '1Xyo4u8uXC1ZmMpatF05PJ', '1uNFoZAHBGtllmzznpCI3s', '6eUKZXaKkcviH0Ku9w2n3V',
-    '7dGJo4pcD2V6oG8kP0tJRR', '66CXWjxzNUsdJxJ2JdwvnR', '5K4W6rqBFWDnAN6FQUkS6x',
-    '0Y5tJX1MQlPlqiwlOH1tJY'
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +32,7 @@ const SelectArtists = () => {
         const token = tokenResponse.data.access_token;
 
         // Fetch artists by IDs
-        const artistPromises = artistIds.map(id =>
+        const artistPromises = artistsdata.map(id =>
           axios.get(`https://api.spotify.com/v1/artists/${id}`, {
             headers: { 'Authorization': 'Bearer ' + token }
           })
@@ -79,18 +62,20 @@ const SelectArtists = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (selectedArtists.length < 3) {
-      alert('Please select at least 3 artists.');
+      toast.error('Select at least 3 artists !', { position: "top-center", toastId: 'welcome-toast'});
       return;
     }
     try {
+      setIsLoading(true);
       const userDocRef = doc(db, 'users', userId);
       await setDoc(userDocRef, {
         artist: selectedArtists
       }, { merge: true });
-      alert('Artists saved successfully!');
       navigate('/createprofile/playlist');
     } catch (error) {
       console.error('Error saving artists:', error);
+    } finally{
+      setIsLoading(false);
     }
   };
 
@@ -99,27 +84,34 @@ const SelectArtists = () => {
   }
 
   return (
-    <div className='w-full h-screen flex flex-col items-center justify-center overflow-auto p-4'>
-      <h1 className='text-3xl text-textcolor font-bold my-5'>Select Your Favorite Artists</h1>
-      <div className='w-full h-[80vh] overflow-y-scroll scrollbar-hide grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4'>
-        {artists.map(artist => (
-          <div
+    <div className='w-full h-screen flex flex-col items-center overflow-y-scroll scrollbar-hide'>
+    <h1 className='text-3xl max-md:text-xl max-md:border-2 max-md:px-5 max-md:mb-6 text-textcolor font-bold mt-14 mb-8 border-4 border-primarycolor px-10 flex justify-center rounded-full py-2 '>Select Your Favorite Arists</h1>
+
+      <ul className='w-full flex flex-wrap justify-center mb-[150px]'>
+      {artists.map(artist => (
+          <li
             key={artist.id}
-            className={`border-2 rounded-lg p-2 cursor-pointer transition-colors duration-300 ease-in-out ${selectedArtists.includes(artist.id) ? 'border-primarycolor bg-highlight text-primarycolor' : 'border-gray-200 bg-transparent text-textcolor'}`}
+            className={` h-[230px] m-3 list-none cursor-pointer transition-colors duration-300 ease-in-out `}
             onClick={() => handleArtistSelect(artist.id)}
           >
-            <img src={artist.images[0]?.url} alt={artist.name} className='w-full h-27 object-cover rounded-full mb-2' />
-            <p className='text-md font-semibold'>{artist.name}</p>
+          <div className='h-[18%]'>
+          <div className={`w-full flex justify-end translate-y-8 -translate-x-1 ${selectedArtists.includes(artist.id) ? '' : 'hidden'}`}><UisCheckCircle size={40} color="white"/></div>
           </div>
+            <img src={artist.images[0]?.url} alt={artist.name} className='h-[150px] w-[150px] rounded-full border-4 shadow-inner' />
+            <p className=' text-black text-md font-semibold w-full bg-primarycolor flex justify-center -translate-y-6 p-2 rounded-full'>{artist.name}</p>
+          </li>
         ))}
-      </div>
-      <button
-        onClick={handleSubmit}
-        className='text-2xl text-textcolor font-semibold border-2 border-primarycolor rounded-lg px-5 py-1 mt-5'
-      >
-        Next
-      </button>
-    </div>
+      
+      </ul>
+
+    <button 
+      onClick={handleSubmit}
+      className=' border-4 text-xl flex bg-primarybg text-textcolor  py-2 px-5 rounded-full font-bold my-14 absolute bottom-0 shadow-black shadow-lg'
+    >
+      Next
+      <UilArrowRight size={30} color="#abc0da"/>
+    </button>
+  </div>
   );
 };
 
