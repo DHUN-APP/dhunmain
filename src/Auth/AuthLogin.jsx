@@ -126,8 +126,8 @@ const AuthLogin = ({setUserType}) => {
           name: user.displayName,
           email: user.email,
           photoURL: user.photoURL,
-          gender: "Not Set",
-          dob: "Not Set",
+          gender: "",
+          dob: "",
           userId: user.uid,
         });
         localStorage.setItem('autoLogin', 'true');
