@@ -1,16 +1,15 @@
+
 # 🎵 [Dhun - Music App](https://dhunmusicapp.web.app/)
 
 _**Stream your favorite songs, create playlists, and explore new music**_ <br />
 
-![2](https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19)
+<img src="https://github.com/user-attachments/assets/225094d5-686f-4f83-99f9-87aa432fea19" alt="Dhun" width="200" align="right"/>
 
- <p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
-
+<p>Music is the divine way to tell beautiful, poetic things to the heart. Music should strike fire from the heart of man, and bring tears from the eyes of woman. Music is moonlight in the gloomy night of life. Music is the soundtrack of your life.</p>
 
 [![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/open-source.svg)](https://forthebadge.com)
-
 
 ### 🎯 Our Goals:
 
@@ -37,8 +36,7 @@ Utilize Firebase for secure user authentication and data management, ensuring us
 _📌 **Social Features**_ <br/>
 Share playlists and favorite tracks with friends, follow other users, and see what your friends are listening to.
 
-
-## 👨‍💻 Contributors ✨
+## 👨‍💻 Team Members ✨
 
 <table>
   <tr>
@@ -49,7 +47,6 @@ Share playlists and favorite tracks with friends, follow other users, and see wh
     <td align="center"><a href="https://github.com/team-member-4"><img src="https://avatars.githubusercontent.com/u/team-member-4?v=4" width="100px;" alt=""/><br /><sub><b>Team Member 4</b></sub></a><br /></td> 
   </tr>
 </table>
-
 
 # Built With
 
@@ -74,7 +71,5 @@ Share playlists and favorite tracks with friends, follow other users, and see wh
 # Features
 
 - 📖 Multi-Page Layout
-
-- 🎨 Styled with React-Taiwind and Css with easy to customize colors
-
+- 🎨 Styled with React-Tailwind and CSS with easy to customize colors
 - 📱 Fully Responsive  
