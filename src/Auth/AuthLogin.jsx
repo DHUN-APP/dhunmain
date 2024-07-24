@@ -102,7 +102,7 @@ const AuthLogin = ({setUserType}) => {
         setUser(storedUser);
         setUserId(storedUserId);
         setUserType(localStorage.getItem('userType'));
-        navigate('/home');
+        navigate('/app/home');
       }
     }
   }, [navigate, setUser, setUserId]);
@@ -140,7 +140,7 @@ const AuthLogin = ({setUserType}) => {
         localStorage.setItem('userType', 'old');
         setUserType('old');
         setIsFirestoreLoading(false);
-        navigate('/home');
+        navigate('/app/home');
       }
     } catch (error) {
       console.error('Error during Google login', error);

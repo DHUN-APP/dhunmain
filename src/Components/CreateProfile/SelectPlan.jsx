@@ -139,7 +139,7 @@ const SelectPlan = () => {
       await setDoc(userDocRef, {
         plan: planType
       }, { merge: true });
-      navigate('/home');
+      navigate('/app/home');
     } catch (error) {
       console.error('Error updating plan:', error);
     } finally{

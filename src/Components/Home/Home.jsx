@@ -60,7 +60,7 @@ const Home = ({userType, setUserType}) => {
 
   if (!user) {
     return (
-      <div className='w-full h-svh flex flex-col items-center justify-center' >
+      <div className='w-full flex flex-col items-center justify-center' >
         <h1 className='text-3xl text-red-600 font-bold my-10'>"Opps! Access Denied"</h1>
         <button className='text-xl text-white font-semibold border-2 px-5 py-2 rounded-lg' onClick={() => { navigate('/') }}> Goto Login Page</button>
       </div>
@@ -68,7 +68,7 @@ const Home = ({userType, setUserType}) => {
   }
 
   return (
-    <div className=' w-full h-screen flex items-center justify-center flex-col '>
+    <div className=' w-full flex items-center justify-center flex-col '>
     <h1 className='text-textcolor text-3xl font-bold mb-3'>Home</h1>
         {user && (
         <div className="flex flex-col justify-center items-center border-2 rounded-lg p-5 md:w-[400px] ">
