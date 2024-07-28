@@ -137,7 +137,7 @@ const SelectPlan = () => {
       setIsLoading(true);
       const userDocRef = doc(db, 'users', userId);
       await setDoc(userDocRef, {
-        plan: planType
+        proplan: planType
       }, { merge: true });
       navigate('/app/home');
     } catch (error) {
@@ -192,13 +192,13 @@ const SelectPlan = () => {
             </li>
           </ul>
           <button
-            onClick={() => handlePlanSelect('Free')}
+            onClick={() => handlePlanSelect(false)}
             className='text-xl w-full text-textcolor font-semibold border-2 border-primarycolor rounded-lg px-5 py-1 md:mt-5 '
           >
             Choose Free Plan
           </button>
         </div>
-        {/* Free Plan Card */}
+        {/* Pro Plan Card */}
         <div className='w-64 p-4 shadow-lg rounded-2xl bg-gray-800'>
           <div className='flex items-center justify-between text-white'>
             <p className='mb-4 text-4xl max-md:text-2xl font-medium'>Pro</p>
@@ -235,7 +235,7 @@ const SelectPlan = () => {
             </li>
           </ul>
           <button
-            onClick={() => handlePlanSelect('Free')}
+            onClick={() => handlePlanSelect(true)}
             className='text-xl w-full text-textcolor font-semibold border-2 border-primarycolor rounded-lg px-5 py-1 md:mt-5 '
           >
             Choose Pro Plan

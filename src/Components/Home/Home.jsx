@@ -68,13 +68,13 @@ const Home = ({userType, setUserType}) => {
   }
 
   return (
-    <div className=' w-full flex items-center justify-center flex-col '>
+    <div className=' w-full flex items-center justify-center flex-col text-white '>
     <h1 className='text-textcolor text-3xl font-bold mb-3'>Home</h1>
         {user && (
         <div className="flex flex-col justify-center items-center border-2 rounded-lg p-5 md:w-[400px] ">
-          <img src={user.photoURL} alt="User Avatar" height={100} width={100} className='rounded-full' />
-          <p className='text-xl text-textcolor font-semibold'>Name: {user.name}</p>
-          <p className='text-xl text-textcolor font-semibold'>Email: {user.email}</p>
+          <img src={firestoreUser.photoURL} alt="User Avatar" height={100} width={100} className='rounded-full' />
+          <p className='text-xl text-textcolor font-semibold'>Name: {firestoreUser.name}</p>
+          <p className='text-xl text-textcolor font-semibold'>Email: {firestoreUser.email}</p>
         </div>
       )}
       <Link to="/" className="p-2 md:w-[400px] w-[90%] bg-slate-400 mt-5 flex items-center justify-center font-semibold text-xl rounded-lg" onClick={handleLogout}>Logout</Link>

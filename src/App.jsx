@@ -2,13 +2,13 @@ import './App.css'
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AuthLogin from "./Auth/AuthLogin";
-import Home from "./Components/Home/Home";
 import CreateProfile from './Components/CreateProfile/CreateProfile';
 import { AuthProvider } from "./Context/AuthContext";
 import NavigationError from "./Errors/NavigationError";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from './Layout/Layout';
+import ProtectedRoute from './Context/ProtectedRoute';
 
 function App() {
 
@@ -20,9 +20,9 @@ function App() {
         <Router>
             <Routes>
               <Route path="/" element={<AuthLogin setUserType={setUserType} />} />
-              <Route path="/createprofile/:section" element={<CreateProfile />} />
-              <Route path="/app/:section" element={<Layout userType={userType} setUserType={setUserType} />} />
-              <Route path="*" element={<NavigationError />} />
+              <Route path="/createprofile/:section" element={<ProtectedRoute><CreateProfile /></ProtectedRoute>} />
+              <Route path="/app/:section" element={<ProtectedRoute><Layout userType={userType} setUserType={setUserType} /></ProtectedRoute>} />
+              <Route path="*" element={<ProtectedRoute><NavigationError /></ProtectedRoute>} />
             </Routes>
         </Router>
         <ToastContainer
