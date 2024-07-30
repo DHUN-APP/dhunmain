@@ -37,7 +37,7 @@ const TopNav = () => {
   };
 
   return (
-    <div className='h-16 z-10 w-full bg-slate-800 md:rounded-t-lg flex  justify-between px-5 py-3 shadow-md shadow-slate-900 max-md:items-center max-md:px-8'>
+    <div className='h-20 max-md:h-16 z-10 w-full bg-slate-800 md:rounded-t-lg flex  justify-between px-5 py-5 shadow-md shadow-slate-900 max-md:items-center max-md:px-8'>
      <div className='md:hidden text-2xl text-white font-bold'>Dhun{firestoreUser && firestoreUser.proplan && (<span>Pro</span>)}
      </div>
      <div className='flex items-center justify-center bg-slate-600 rounded-full max-md:hidden px-3 text-white font-semibold'>
