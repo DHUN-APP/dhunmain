@@ -12,19 +12,24 @@ const Home = ({userType, setUserType}) => {
   const { user, userId, logout } = useAuth();
   const [firestoreUser, setFirestoreUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [toastShown, setToastShown] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userType && !toast.isActive('welcome-toast')) {
+    if (userType && !toast.isActive('welcome-toast') && !toastShown) {
       if (userType === 'old') {
-        toast.success('Logged in Successfully!', { position: "top-center", toastId: 'welcome-toast', onClose: () => setUserType('') });
+        toast.success('Logged in Successfully!', { position: "top-center", toastId: 'welcome-toast' });
+        setToastShown(true); // Mark toast as shown
+        setUserType('old'); // Ensure userType is set to 'old' after logging in
       } else if (userType === 'new') {
-        toast.success('Signed Up Successfully!', { position: "top-center", toastId: 'welcome-toast', onClose: () => setUserType('') });
-      } else {
-        console.log('Default case');
+        toast.success('Signed Up Successfully!', { position: "top-center", toastId: 'welcome-toast', onClose: () => {
+          setToastShown(true); // Mark toast as shown
+          setUserType('old');
+        }});
       }
     }
-  }, [userType]);
+  }, [userType, setUserType, toastShown]);
+
 
   useEffect(() => {
     const getFirestoreData = async () => {

@@ -105,7 +105,7 @@ const AuthLogin = ({setUserType}) => {
         navigate('/app/home');
       }
     }
-  }, [navigate, setUser, setUserId]);
+  }, [navigate, setUser, setUserId, setUserType]);
 
   const handleGoogleLogin = async () => {
     try {
