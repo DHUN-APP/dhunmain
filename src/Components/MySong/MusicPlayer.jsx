@@ -238,6 +238,13 @@ const MusicPlayer = ({ songFileUrl, audioRef, onLoadedMetadata }) => {
     }
   };
 
+  const handleSongEnd = () => {
+    setCurrentTime(0);
+    setIsPlaying(false);
+  };
+
+  
+
 
   useEffect(() => {
     if (audioRef.current) {
@@ -246,10 +253,12 @@ const MusicPlayer = ({ songFileUrl, audioRef, onLoadedMetadata }) => {
       audioRef.current.muted = isMuted;
       audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
       audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+      audioRef.current.addEventListener('ended', handleSongEnd);
       return () => {
         if (audioRef.current) {
           audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
           audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
+          audioRef.current.removeEventListener('ended', handleSongEnd);
         }
       };
     }

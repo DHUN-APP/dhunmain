@@ -1,6 +1,6 @@
 import React from 'react'
 import MyInfo from './MyInfo'
-import MyPlaylists from './MyPlaylists'
+import MyPlaylists from '../MyPlaylist/Myplaylists'
 import MyFollowings from './MyFollowings'
 import MySongs from '../MySong/MySongs'
 
