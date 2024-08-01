@@ -10,6 +10,7 @@ import ProPlan from '../ProPlan/ProPlan';
 import AddSong from '../MySong/AddSong';
 import SongDetails from '../MySong/SongDetails';
 import { useParams } from 'react-router-dom';
+import EditInfo from '../MyProfile/EditInfo';
 
 const Main = ({section, userType, setUserType, songId, setSongId}) => {
 
@@ -33,6 +34,8 @@ const Main = ({section, userType, setUserType, songId, setSongId}) => {
             return <Settings/>
           case "proplan":
             return <ProPlan/>
+          case "editinfo":
+            return <EditInfo/>
           default:
             return <Home userType={userType} setUserType={setUserType} />;
         }

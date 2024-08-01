@@ -3,11 +3,13 @@ import { useAuth } from '../../Context/AuthContext';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { MdEdit } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
 const MyInfo = () => {
   const { user, userId } = useAuth();
   const [firestoreUser, setFirestoreUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getFirestoreData = async () => {
@@ -48,7 +50,7 @@ const MyInfo = () => {
           <div className='md:w-4/5 flex flex-col'>
             <div className='flex justify-between items-center md:h-2/3 max-md:my-5 '>
               <div className='text-4xl max-md:text-2xl font-bold flex items-center text-textcolor '>{firestoreUser.name}</div>
-              <div className='flex items-center justify-center px-6 max-md:px-3 text-lg font-semibold py-2 max-md:py-1 bg-slate-300 gap-2 max-md:gap-1 rounded-full'><MdEdit size={20} />Edit</div>
+              <div onClick={ () => navigate('/app/editinfo') } className='flex items-center justify-center px-6 max-md:px-3 text-lg font-semibold py-2 max-md:py-1 bg-slate-300 gap-2 max-md:gap-1 rounded-full'><MdEdit size={20} />Edit</div>
             </div>
             <div className='text-xl max-md:text-lg font-semibold md:h-1/3 flex items-center text-textcolor'>10 Songs | 5 Public PlayLists | 200 Followers | 10 Followings</div>
           </div>
