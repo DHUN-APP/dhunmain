@@ -11,6 +11,7 @@ import AddSong from '../MySong/AddSong';
 import SongDetails from '../MySong/SongDetails';
 import { useParams } from 'react-router-dom';
 import EditInfo from '../MyProfile/EditInfo';
+import EditSong from '../MySong/EditSong';
 
 const Main = ({section, userType, setUserType, songId, setSongId}) => {
 
@@ -28,6 +29,8 @@ const Main = ({section, userType, setUserType, songId, setSongId}) => {
             return <SongDetails songId={songId}/>
           case "addsong":
             return <AddSong/>
+          case "editsong":
+            return <EditSong songId={songId}/>
           case "notifications":
             return <Notifications/>
           case "settings":

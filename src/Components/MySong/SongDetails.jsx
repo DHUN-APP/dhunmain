@@ -88,6 +88,8 @@ import { db } from '../../../firebase-config';
 import { useAuth } from '../../Context/AuthContext';
 import MusicPlayer from './MusicPlayer';
 import { MdEdit } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import { TiArrowBack } from "react-icons/ti";
 
 const SongDetails = ({ songId }) => {
   const [song, setSong] = useState(null);
@@ -95,6 +97,7 @@ const SongDetails = ({ songId }) => {
   const [duration, setDuration] = useState(null);
   const audioRef = useRef(null);
   const { userId } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSongDetails = async () => {
@@ -151,7 +154,8 @@ const SongDetails = ({ songId }) => {
   }
 
   return (
-    <div className="flex flex-col my-10">
+    <div className="flex flex-col mt-10">
+      <div className='mb-3 flex pl-5'><div onClick={() => navigate(-1)}><TiArrowBack size={40} color='white' /></div></div>
       <div className="flex w-full max-md:flex-col">
         <div className="w-1/5 md:p-5 flex items-center justify-center max-md:w-full">
           <img src={song.coverImgUrl} alt={song.songName} className="h-48 w-48 rounded-md" />
@@ -159,7 +163,7 @@ const SongDetails = ({ songId }) => {
         <div className="w-4/5 p-5 max-md:w-full">
             <div className='flex justify-between items-center '>
               <div className='text-4xl font-bold flex items-center text-textcolor '>{song.songName}</div>
-              <div className='flex items-center justify-center px-6 max-md:px-3 text-lg font-semibold py-2 max-md:py-1 bg-slate-300 gap-2 max-md:gap-1 rounded-full'><MdEdit size={20} />Edit</div>
+              <div onClick={() => navigate('/app/editsong')} className='flex items-center justify-center px-6 max-md:px-3 text-lg font-semibold py-2 max-md:py-1 bg-slate-300 gap-2 max-md:gap-1 rounded-full'><MdEdit size={20} />Edit</div>
             </div>
           <h2 className="text-2xl max-md:text-xl my-3 font-semibold text-textcolor">By {song.singer}</h2>
           <hr className="h-1 my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
@@ -167,7 +171,7 @@ const SongDetails = ({ songId }) => {
           <div className="flex items-center text-lg font-semibold text-textcolor">Uploaded on: <div className='text-sm font-normal ml-3'>{formatTimestamp(song.timestamp)}</div></div>
         </div>
       </div>
-      <div className='h-1/2'>
+      <div className='mb-5'>
         <MusicPlayer 
           songFileUrl={song.songFileUrl} 
           audioRef={audioRef} 
