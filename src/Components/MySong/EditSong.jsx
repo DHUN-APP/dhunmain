@@ -80,7 +80,7 @@ const EditSong = ({ songId }) => {
         const songs = userDocSnapshot.data().mysongs;
         const updatedSongs = songs.map(song =>
           song.songId === songId
-            ? { ...song, songName, singer, coverImgUrl: updatedCoverImgUrl }
+            ? { ...song, songName, singer, coverImgUrl: updatedCoverImgUrl ,updatetimestamp : new Date().toISOString()}
             : song
         );
 
