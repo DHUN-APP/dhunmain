@@ -2,9 +2,9 @@ import React from 'react'
 import { useParams } from 'react-router-dom';
 import AdminHome from './Components/Home/AdminHome'
 import NavBar from './Components/NavBar/NavBar';
-import { ManageUsers } from './Components/ManageUser/ManageUsers';
 import ManageArtists from './Components/ManageArtist/ManageArtists';
 import ManagePlaylists from './Components/ManagePlaylist/ManagePlaylists';
+import ManageUsers from './Components/ManageUser/ManageUsers';
 
 const AdminMain = () => {
 
@@ -15,7 +15,7 @@ const AdminMain = () => {
       case "home":
         return <AdminHome/>;
       case "manageuser":
-        return <ManageUsers />;
+        return <ManageUsers/>
       case "manageartist":
         return <ManageArtists/>
       case "manageplaylist":
