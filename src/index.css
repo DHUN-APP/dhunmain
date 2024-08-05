@@ -21,3 +21,32 @@ body{
     scrollbar-width: none;  
 }
 
+
+
+.scrollbar-custom::-webkit-scrollbar {
+    width: 12px; /* Width of the entire scrollbar */
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent; /* Background of the track */
+    border-radius: 10px; /* Rounded corners for the track */
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: white; /* Color of the track bar */
+    border-radius: 10px; /* Rounded corners for the track bar */
+    border: 3px solid transparent; /* Add space around thumb */
+    background-clip: padding-box; /* Make sure border is not covered by the background color */
+  }
+  
+  /* For Firefox */
+  .scrollbar-custom {
+    scrollbar-width: thin; /* Thin scrollbar */
+    scrollbar-color: white transparent; /* Track bar and background color */
+  }
+  
+  /* For Edge and IE */
+  .scrollbar-custom {
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* Auto-hide scrollbar */
+  }
+  

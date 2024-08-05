@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from './Layout/Layout';
 import ProtectedRoute from './Context/ProtectedRoute';
+import AdminMain from './Admin/AdminMain';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           ) : (
             <Routes>
               <Route path="/" element={<AuthLogin setUserType={setUserType} />} />
+              <Route path="/admin/:section" element={<ProtectedRoute><AdminMain/></ProtectedRoute>} />
               <Route path="/createprofile/:section" element={<ProtectedRoute><CreateProfile /></ProtectedRoute>} />
               <Route path="/app/:section" element={<ProtectedRoute><Layout userType={userType} setUserType={setUserType} /></ProtectedRoute>} />
               <Route path="*" element={<ProtectedRoute><NavigationError /></ProtectedRoute>} />
