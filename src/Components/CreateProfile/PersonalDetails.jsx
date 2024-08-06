@@ -66,7 +66,8 @@ const PersonalDetails = () => {
           placeholder="Name" 
           className='outline-none rounded-lg px-3 py-1 w-full font-semibold'
           value={name} 
-          onChange={(e) => setFirstName(e.target.value)}            
+          onChange={(e) => setFirstName(e.target.value)}
+          required            
         />
         <h1 className='w-full flex justify-start mb-1 mt-5 text-textcolor text-xl font-semibold'>DOB :</h1>       
         <div className='relative w-full'>
@@ -91,7 +92,7 @@ const PersonalDetails = () => {
           value={gender}
           onChange={(e) => setGender(e.target.value)}
           required
-        >
+        > <option value="">Select Gender</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Other">Other</option>
