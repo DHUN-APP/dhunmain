@@ -1,7 +1,7 @@
 import React from 'react'
 import MyInfo from './MyInfo'
 import Myplaylists from '../MyPlaylist/Myplaylists'
-import MyFollowings from './MyFollowings'
+import MyFollowings from '../MyFollowings/MyFollowings'
 import MySongs from '../MySong/MySongs'
 
 
