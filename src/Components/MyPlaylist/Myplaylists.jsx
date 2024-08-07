@@ -85,7 +85,7 @@ const Myplaylists = ({setPlaylistId}) => {
           <div className='flex items-center justify-center gap-3'>
             <IoMusicalNote size={30} />
             <h1 className='text-3xl max-md:text-xl font-semibold text-textcolor'>
-              My Playlists ({filteredPlaylists.length})
+              My Playlists ({filteredPlaylists.length}/{playlists.length})
             </h1>
           </div>
           <div className='ml-5 max-md:ml-3 max-md:my-5 flex items-center border-primarycolor text-white font-semibold border-b-2'>
