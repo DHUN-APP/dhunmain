@@ -12,6 +12,8 @@ const Layout = ({userType, setUserType}) => {
   const {section} = useParams();
   const [songId, setSongId] = useState(null);
   const [playlistId, setPlaylistId] = useState(null);
+  const [artistId, setArtistId] = useState(null);
+  
 
  
   return (
@@ -21,7 +23,7 @@ const Layout = ({userType, setUserType}) => {
     </div>
       <div className="md:w-3/4 flex flex-col rounded-lg max-md:w-full h-screen md:py-4">
         <TopNav />
-        <div className='flex-grow overflow-auto hide-scrollbar md:bg-slate-800 rounded-b-lg scrollbar-hide'><Main section={section} userType={userType} setUserType={setUserType} songId={songId} setSongId={setSongId} playlistId={playlistId} setPlaylistId={setPlaylistId}/></div>
+        <div className='flex-grow overflow-auto hide-scrollbar md:bg-slate-800 rounded-b-lg scrollbar-hide'><Main section={section} userType={userType} setUserType={setUserType} songId={songId} setSongId={setSongId} playlistId={playlistId} setPlaylistId={setPlaylistId} artistId={artistId} setArtistId={setArtistId} /></div>
         <BottomNav />
       </div>
     </div>

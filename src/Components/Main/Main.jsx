@@ -13,8 +13,10 @@ import EditInfo from '../MyProfile/EditInfo';
 import PlaylistDetails from '../MyPlaylist/PlaylistDetails';
 import AddPlaylist from '../MyPlaylist/AddPlaylist';
 import EditPlaylist from '../MyPlaylist/EditPlaylist';
+import FollowingDetails from '../MyFollowings/FollowingDetails';
+import Song_Details from '../MyFollowings/Song_Details';
 
-const Main = ({ section, userType, setUserType, songId, setSongId, playlistId, setPlaylistId }) => {
+const Main = ({ section, userType, setUserType, songId, setSongId, playlistId, setPlaylistId ,artistId ,setArtistId }) => {
   const navigate = useNavigate();
 
   const renderComponent = () => {
@@ -24,7 +26,7 @@ const Main = ({ section, userType, setUserType, songId, setSongId, playlistId, s
       case "search":
         return <Search />;
       case "myprofile":
-        return <MyProfile setSongId={setSongId} setPlaylistId={setPlaylistId} />;
+        return <MyProfile setSongId={setSongId} setPlaylistId={setPlaylistId} setArtistId={setArtistId} />;
       case "song":
         return <SongDetails songId={songId} />;
       case "addsong":
@@ -38,15 +40,17 @@ const Main = ({ section, userType, setUserType, songId, setSongId, playlistId, s
       case "proplan":
         return <ProPlan />;
       case "editinfo":
-        return <EditInfo />;
-
-     
+        return <EditInfo />;     
       case "playlist":
         return <PlaylistDetails playlistId={playlistId} />;
       case "addplaylist":
         return <AddPlaylist />;
       case "editplaylist":
         return <EditPlaylist playlistId={playlistId} />;
+      case "followingdetails":
+        return <FollowingDetails artistId={artistId} setSongId={setSongId}/>
+      case "songdetails":
+        return <Song_Details artistId={artistId} songId={songId}  />
       default:
         return <Home userType={userType} setUserType={setUserType} />;
     }
