@@ -4,16 +4,19 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import LocalLoader from '../Loaders/LocalLoader';
 
 const MyInfo = () => {
   const { user, userId } = useAuth();
   const [firestoreUser, setFirestoreUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const getFirestoreData = async () => {
       try {
+        setIsLoading(true);
         const q = query(collection(db, "users"), where("userId", "==", userId));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
@@ -30,10 +33,9 @@ const MyInfo = () => {
     }
   }, [userId]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if(isLoading){
+    return <LocalLoader/>
   }
-
   if (!firestoreUser) {
     return <div>No user data found</div>;
   }

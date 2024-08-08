@@ -22,7 +22,7 @@ const Main = ({ section, userType, setUserType, songId, setSongId, playlistId, s
   const renderComponent = () => {
     switch (section) {
       case "home":
-        return <Home userType={userType} setUserType={setUserType} />;
+        return <Home userType={userType} setUserType={setUserType} setArtistId={setArtistId} />;
       case "search":
         return <Search />;
       case "myprofile":

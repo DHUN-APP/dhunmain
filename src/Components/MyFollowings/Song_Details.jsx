@@ -5,6 +5,7 @@ import { useAuth } from '../../Context/AuthContext';
 import MusicPlayer from './MusicPlayer';
 import { TiArrowBack } from "react-icons/ti";
 import { useNavigate } from 'react-router-dom';
+import LocalLoader from '../Loaders/LocalLoader';
 
 const Song_Details = ({ artistId, songId }) => {
   const [song, setSong] = useState(null);
@@ -13,10 +14,12 @@ const Song_Details = ({ artistId, songId }) => {
   const [duration, setDuration] = useState(null);
   const audioRef = useRef(null);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchSongDetails = async () => {
       try {
+        setIsLoading(true);
         if (!artistId || !songId) {
           console.error('Missing artistId or songId');
           setSong(null);
@@ -47,8 +50,8 @@ const Song_Details = ({ artistId, songId }) => {
       } catch (error) {
         console.error('Error fetching song details:', error);
         setSong(null);
-      } finally {
-        setLoading(false);
+      }finally {
+        setIsLoading(false);
       }
     };
 
@@ -70,8 +73,8 @@ const Song_Details = ({ artistId, songId }) => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if(isLoading){
+    return <LocalLoader/>
   }
 
   if (!song) {

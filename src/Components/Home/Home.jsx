@@ -5,8 +5,13 @@ import { db } from '../../../firebase-config';
 import { useNavigate, Link } from 'react-router-dom';
 import LocalLoader from '../Loaders/LocalLoader';
 import { toast } from 'react-toastify';
+import IndianFemale from './IndianFemale';
+import IndianMale from './IndianMale';
+import ForeignMale from './ForeignMale';
+import ForeignFemale from './ForeignFemale';
 
-const Home = ({ userType, setUserType }) => {
+
+const Home = ({ userType, setUserType, setArtistId }) => {
   const { user, userId, logout } = useAuth();
   const [firestoreUser, setFirestoreUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -81,22 +86,11 @@ const Home = ({ userType, setUserType }) => {
   }
 
   return (
-    <div className='w-full flex items-center justify-center flex-col text-white'>
-      <h1 className='text-textcolor text-3xl font-bold mb-3'>Home</h1>
-      {user && (
-        <div className="flex flex-col justify-center items-center border-2 rounded-lg p-5 md:w-[400px]">
-          <img src={firestoreUser.photoURL} alt="User Avatar" height={100} width={100} className='rounded-full' />
-          <p className='text-xl text-textcolor font-semibold'>Name: {firestoreUser.name}</p>
-          <p className='text-xl text-textcolor font-semibold'>Email: {firestoreUser.email}</p>
-        </div>
-      )}
-      <Link
-        to="/"
-        className="p-2 md:w-[400px] w-[90%] bg-slate-400 mt-5 flex items-center justify-center font-semibold text-xl rounded-lg"
-        onClick={handleLogout}
-      >
-        Logout
-      </Link>
+    <div className='w-full flex flex-col text-white mb-16'>
+      <IndianMale setArtistId={setArtistId}/>
+      <IndianFemale setArtistId={setArtistId}/>
+      <ForeignMale setArtistId={setArtistId}/>
+      <ForeignFemale setArtistId={setArtistId}/>
     </div>
   );
 };

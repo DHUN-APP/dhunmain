@@ -7,6 +7,7 @@ import { IoIosSearch } from "react-icons/io";
 import { useAuth } from '../../Context/AuthContext';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
+import LocalLoader from '../Loaders/LocalLoader';
 
 const MySongs = ({setSongId}) => {
   const { userId } = useAuth();
@@ -14,23 +15,33 @@ const MySongs = ({setSongId}) => {
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchSongs = async () => {
-      if (userId) {
-        const userDocRef = doc(db, 'users', userId);
-        const userDocSnapshot = await getDoc(userDocRef);
-        if (userDocSnapshot.exists()) {
-          const userData = userDocSnapshot.data();
-          if (userData.mysongs) {
-            setSongs(userData.mysongs);
-            setFilteredSongs(userData.mysongs);
+      try {
+        setIsLoading(true);
+        if (userId) {
+          const userDocRef = doc(db, 'users', userId);
+          const userDocSnapshot = await getDoc(userDocRef);
+          if (userDocSnapshot.exists()) {
+            const userData = userDocSnapshot.data();
+            if (userData.mysongs) {
+              setSongs(userData.mysongs);
+              setFilteredSongs(userData.mysongs);
+            }
           }
         }
+      } catch (error) {
+        console.error("Error fetching songs: ", error);
+        // Handle error (e.g., show a user-friendly message or set an error state)
+      }finally {
+        setIsLoading(false);
       }
     };
     fetchSongs();
   }, [userId]);
+  
 
   useEffect(() => {
     const filterSongs = () => {
@@ -57,6 +68,10 @@ const MySongs = ({setSongId}) => {
     }
 
 };
+
+if(isLoading){
+  return <LocalLoader/>
+}
 
   return (
     <div className='p-5 max-md:p-3 flex flex-col'>
