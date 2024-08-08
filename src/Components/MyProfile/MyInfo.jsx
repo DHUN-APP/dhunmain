@@ -123,10 +123,10 @@ const MyInfo = () => {
               <div className='text-4xl max-md:text-2xl font-bold flex items-center text-textcolor '>{firestoreUser.name}</div>
               <div onClick={ () => navigate('/app/editinfo') } className='flex items-center justify-center px-6 max-md:px-3 text-lg font-semibold py-2 max-md:py-1 bg-slate-300 gap-2 max-md:gap-1 rounded-full'><MdEdit size={20} />Edit</div>
             </div>
-            <div className='text-lg font-bold md:h-1/3 flex gap-3 items-center text-slate-900'>
-              <div className='bg-slate-400 px-5 py-1 rounded-full'>{songsCount} Songs</div>
-              <div className='bg-slate-400 px-5 py-1 rounded-full'>{firestoreUser.playlists ? firestoreUser.myplaylists.length : 0} PlayLists</div>
-              <div className='bg-slate-400 px-5 py-1 rounded-full'>{followingsCount} Followings</div>
+            <div className='text-lg font-bold md:h-1/3 flex gap-3 items-center text-slate-900 text-center'>
+              <div className=' bg-slate-400 px-5 py-1 rounded-full'>{songsCount} Songs</div>
+              <div className=' bg-slate-400 px-5 py-1 rounded-full'>{firestoreUser.playlists ? firestoreUser.myplaylists.length : 0} PlayLists</div>
+              <div className=' bg-slate-400 px-5 py-1 rounded-full'>{followingsCount} Followings</div>
             </div>
           </div>
 
