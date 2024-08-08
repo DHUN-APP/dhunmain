@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { useAuth } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { MdEdit } from "react-icons/md";
 import { TiArrowBack } from "react-icons/ti";
+import LocalLoader from '../Loaders/LocalLoader';
 
-const PlaylistDetails = ({ playlistId }) => {
+const PlaylistDetails = ({ playlistId, setSongId }) => {
   const [playlist, setPlaylist] = useState(null);
   const [songsDetails, setSongsDetails] = useState([]);
-  const [loading, setLoading] = useState(true);
   const { userId } = useAuth();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPlaylistDetails = async () => {
       try {
+        setIsLoading(true);
         const userDocRef = doc(db, 'users', userId);
         const userDocSnapshot = await getDoc(userDocRef);
 
@@ -47,7 +49,7 @@ const PlaylistDetails = ({ playlistId }) => {
       } catch (error) {
         console.error('Error fetching playlist details:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -63,17 +65,30 @@ const PlaylistDetails = ({ playlistId }) => {
     });
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if(isLoading){
+    return <LocalLoader/>
   }
 
   if (!playlist) {
     return <div>Playlist not found</div>;
   }
 
+  const handleClick = async (songId) => {
+    setSongId(songId);
+    navigate("/app/song")
+
+    if (userId) {
+      const userDocRef = doc(db, 'users', userId);
+      await updateDoc(userDocRef, {
+        lastPlayed: songId
+      });
+    }
+
+};
+
   return (
-    <div className="flex flex-col mt-10">
-      <div className='mb-3 flex pl-5'>
+    <div className="flex flex-col mt-10 px-5 mb-16">
+      <div className='mb-3 flex'>
         <div onClick={() => navigate(-1)}>
           <TiArrowBack size={40} color='white' />
         </div>
@@ -97,11 +112,14 @@ const PlaylistDetails = ({ playlistId }) => {
 
       <h2 className="text-2xl max-md:text-xl my-3 font-semibold text-textcolor">Songs:</h2>
           {songsDetails.map((song, index) => (
-            <div key={index} className="my-2">
+            <div key={index} onClick={() => handleClick(song.songId)} className="my-2 flex items-center border-2 rounded-md p-2">
+              <img src={song.coverImgUrl} alt={song.songName} className="h-16 w-16 rounded-md" />
+              <div className='ml-3 flex flex-col'>
               <div className="text-lg font-semibold text-textcolor">{song.songName}</div>
-              <div className="text-sm font-normal text-textcolor">Singer: {song.singer}</div>
-              <div className="text-sm font-normal text-textcolor">Timestamp: {formatTimestamp(song.timestamp)}</div>
-              <img src={song.coverImgUrl} alt={song.songName} className="h-24 w-24 rounded-md" />
+              <div className="text-md font-semibold text-textcolor">By: {song.singer}</div>
+              <div className="text-md font-semibold text-textcolor">Uploaded On: {formatTimestamp(song.timestamp)}</div>
+              </div>
+              
             </div>
           ))}
 

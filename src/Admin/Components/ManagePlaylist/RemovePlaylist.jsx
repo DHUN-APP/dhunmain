@@ -72,7 +72,7 @@ const RemovePlaylist = () => {
         const data = docSnap.data();
         setPlaylistName(data.name);
         setPlaylistId(data.playlistId);
-        setPhotoURL(data.coverImageURL);
+        setPhotoURL(data.coverImgURL);
         setSongCount(data.songs.length);
       } else {
         toast.error('Playlist not found.');

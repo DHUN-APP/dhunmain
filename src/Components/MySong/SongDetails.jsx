@@ -83,25 +83,29 @@
 
 
 import React, { useEffect, useState, useRef } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../firebase-config';
 import { useAuth } from '../../Context/AuthContext';
 import MusicPlayer from './MusicPlayer';
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { TiArrowBack } from "react-icons/ti";
+import LocalLoader from '../Loaders/LocalLoader';
+
 
 const SongDetails = ({ songId }) => {
   const [song, setSong] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [duration, setDuration] = useState(null);
   const audioRef = useRef(null);
   const { userId } = useAuth();
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const fetchSongDetails = async () => {
       try {
+        setIsLoading(true);
         const userDocRef = doc(db, 'users', userId);
         const userDocSnapshot = await getDoc(userDocRef);
 
@@ -123,7 +127,7 @@ const SongDetails = ({ songId }) => {
       } catch (error) {
         console.error('Error fetching song details:', error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -145,8 +149,8 @@ const SongDetails = ({ songId }) => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
+  if(isLoading){
+    return <LocalLoader/>
   }
 
   if (!song) {

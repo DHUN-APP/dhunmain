@@ -6,13 +6,13 @@ import { toast } from 'react-toastify';
 const CreatePlaylist = () => {
   const [playlistName, setPlaylistName] = useState('');
   const [playlistId, setPlaylistId] = useState('');
-  const [coverImageURL, setCoverImageURL] = useState('');
+  const [coverImgURL, setCoverImageURL] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleCreatePlaylist = async (event) => {
     event.preventDefault();
 
-    if (!playlistName || !playlistId || !coverImageURL) {
+    if (!playlistName || !playlistId || !coverImgURL) {
       toast.error('All fields are required.');
       return;
     }
@@ -33,7 +33,7 @@ const CreatePlaylist = () => {
       await setDoc(playlistDocRef, {
         name: playlistName,
         playlistId,
-        coverImageURL,
+        coverImgURL,
         songs: [],
         createdOn: currentTimestamp,
         updatedOn: currentTimestamp,
@@ -75,7 +75,7 @@ const CreatePlaylist = () => {
         <h2 className='text-xl text-textcolor font-semibold mt-5 mb-2'>Cover Image URL :</h2>
         <input
           type="text"
-          value={coverImageURL}
+          value={coverImgURL}
           onChange={(e) => setCoverImageURL(e.target.value)}
           placeholder="Enter Cover Image URL"
           className='w-full p-2 bg-slate-600 text-lg text-white font-semibold rounded-md outline-none'

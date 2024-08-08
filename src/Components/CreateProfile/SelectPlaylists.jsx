@@ -202,7 +202,7 @@ const SelectPlaylists = () => {
               </div>
             </div>
             <div className='h-[65%]'>
-              <img src={playlist.coverImageURL} alt={playlist.name} className='h-[200px] w-[200px] max-md:h-[150px] max-md:w-[150px]' />
+              <img src={playlist.coverImgURL} alt={playlist.name} className='h-[200px] w-[200px] max-md:h-[150px] max-md:w-[150px]' />
             </div>
             <p className='text-textcolor rounded-b-xl h-[20%] items-center max-md:text-sm text-md font-semibold w-full flex p-2 justify-center'>{playlist.name}</p>
           </li>

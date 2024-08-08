@@ -9,9 +9,11 @@ import IndianFemale from './IndianFemale';
 import IndianMale from './IndianMale';
 import ForeignMale from './ForeignMale';
 import ForeignFemale from './ForeignFemale';
+import PopularPlaylist from './PopularPlaylist';
+import LastGlobalPlaylist from './LastGlobalPlaylist';
 
 
-const Home = ({ userType, setUserType, setArtistId }) => {
+const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
   const { user, userId, logout } = useAuth();
   const [firestoreUser, setFirestoreUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -87,8 +89,10 @@ const Home = ({ userType, setUserType, setArtistId }) => {
 
   return (
     <div className='w-full flex flex-col text-white mb-16'>
+      <LastGlobalPlaylist setPlaylistId={setPlaylistId}/>
       <IndianMale setArtistId={setArtistId}/>
       <IndianFemale setArtistId={setArtistId}/>
+      <PopularPlaylist setPlaylistId={setPlaylistId}/>
       <ForeignMale setArtistId={setArtistId}/>
       <ForeignFemale setArtistId={setArtistId}/>
     </div>

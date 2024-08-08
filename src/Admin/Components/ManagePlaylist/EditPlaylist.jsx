@@ -70,7 +70,7 @@ const EditPlaylist = () => {
         const data = docSnap.data();
         setPlaylistName(data.name);
         setPlaylistId(data.playlistId);
-        setPhotoURL(data.coverImageURL);
+        setPhotoURL(data.coverImgURL);
       } else {
         toast.error('Playlist not found.');
         navigate('/admin/manageplaylists');
@@ -88,7 +88,7 @@ const EditPlaylist = () => {
       const docRef = doc(db, 'playlists', selectedPlaylistId);
       await updateDoc(docRef, {
         name: playlistName,
-        coverImageURL: photoURL,
+        coverImgURL: photoURL,
         updatedOn: new Date()
       });
 

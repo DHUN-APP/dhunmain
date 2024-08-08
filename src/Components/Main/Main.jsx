@@ -15,6 +15,7 @@ import AddPlaylist from '../MyPlaylist/AddPlaylist';
 import EditPlaylist from '../MyPlaylist/EditPlaylist';
 import FollowingDetails from '../MyFollowings/FollowingDetails';
 import Song_Details from '../MyFollowings/Song_Details';
+import GlobalPlaylistDetails from '../MyPlaylist/GlobalPlaylistDetails';
 
 const Main = ({ section, userType, setUserType, songId, setSongId, playlistId, setPlaylistId ,artistId ,setArtistId }) => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Main = ({ section, userType, setUserType, songId, setSongId, playlistId, s
   const renderComponent = () => {
     switch (section) {
       case "home":
-        return <Home userType={userType} setUserType={setUserType} setArtistId={setArtistId} />;
+        return <Home userType={userType} setUserType={setUserType} setArtistId={setArtistId} setPlaylistId={setPlaylistId} />;
       case "search":
         return <Search />;
       case "myprofile":
@@ -42,7 +43,9 @@ const Main = ({ section, userType, setUserType, songId, setSongId, playlistId, s
       case "editinfo":
         return <EditInfo />;     
       case "playlist":
-        return <PlaylistDetails playlistId={playlistId} />;
+        return <PlaylistDetails playlistId={playlistId} setSongId={setSongId} />;
+      case "globalplaylist":
+        return <GlobalPlaylistDetails playlistId={playlistId} setSongId={setSongId} setArtistId={setArtistId} />;
       case "addplaylist":
         return <AddPlaylist />;
       case "editplaylist":
