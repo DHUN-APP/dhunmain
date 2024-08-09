@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from '../../../../firebase-config';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../../../../firebase-config";
+import { toast } from "react-toastify";
 
 const CreatePlaylist = () => {
-  const [playlistName, setPlaylistName] = useState('');
-  const [playlistId, setPlaylistId] = useState('');
-  const [coverImgURL, setCoverImageURL] = useState('');
+  const [playlistName, setPlaylistName] = useState("");
+  const [playlistId, setPlaylistId] = useState("");
+  const [coverImgURL, setCoverImageURL] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleCreatePlaylist = async (event) => {
     event.preventDefault();
 
     if (!playlistName || !playlistId || !coverImgURL) {
-      toast.error('All fields are required.');
+      toast.error("All fields are required.");
       return;
     }
 
@@ -24,7 +24,7 @@ const CreatePlaylist = () => {
       const playlistDocSnapshot = await getDoc(playlistDocRef);
 
       if (playlistDocSnapshot.exists()) {
-        toast.error('Playlist with this ID already exists.');
+        toast.error("Playlist with this ID already exists.");
         return;
       }
 
@@ -39,54 +39,60 @@ const CreatePlaylist = () => {
         updatedOn: currentTimestamp,
       });
 
-      toast.success('Playlist created successfully!');
-      setPlaylistName('');
-      setPlaylistId('');
-      setCoverImageURL('');
+      toast.success("Playlist created successfully!");
+      setPlaylistName("");
+      setPlaylistId("");
+      setCoverImageURL("");
     } catch (error) {
-      console.error('Error creating playlist:', error);
-      toast.error('Error creating playlist.');
+      console.error("Error creating playlist:", error);
+      toast.error("Error creating playlist.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className='flex flex-col w-[400px] max-md:w-[90%]'>
-      <form onSubmit={handleCreatePlaylist} className='flex flex-col w-full'>
-        <h2 className='text-xl text-textcolor font-semibold mt-5 mb-2'>Playlist Name :</h2>
+    <div className="flex flex-col w-[400px] max-md:w-[90%]">
+      <form onSubmit={handleCreatePlaylist} className="flex flex-col w-full">
+        <h2 className="text-xl text-textcolor font-semibold mt-5 mb-2">
+          Playlist Name :
+        </h2>
         <input
           type="text"
           value={playlistName}
           onChange={(e) => setPlaylistName(e.target.value)}
           placeholder="Enter Playlist Name"
-          className='w-full p-2 bg-slate-600 text-lg text-white font-semibold rounded-md outline-none'
+          className="w-full p-2 bg-slate-600 text-lg text-white font-semibold rounded-md outline-none"
           required
         />
-        <h2 className='text-xl text-textcolor font-semibold mt-5 mb-2'>Playlist ID :</h2>
+        <h2 className="text-xl text-textcolor font-semibold mt-5 mb-2">
+          Playlist ID :
+        </h2>
         <input
           type="text"
           value={playlistId}
           onChange={(e) => setPlaylistId(e.target.value)}
           placeholder="Enter Unique Playlist ID"
-          className='w-full p-2 bg-slate-600 text-lg text-white font-semibold rounded-md outline-none'
+          className="w-full p-2 bg-slate-600 text-lg text-white font-semibold rounded-md outline-none"
           required
         />
-        <h2 className='text-xl text-textcolor font-semibold mt-5 mb-2'>Cover Image URL :</h2>
+        <h2 className="text-xl text-textcolor font-semibold mt-5 mb-2">
+          Cover Image URL :
+        </h2>
         <input
           type="text"
           value={coverImgURL}
           onChange={(e) => setCoverImageURL(e.target.value)}
           placeholder="Enter Cover Image URL"
-          className='w-full p-2 bg-slate-600 text-lg text-white font-semibold rounded-md outline-none'
+          className="w-full p-2 bg-slate-600 text-lg text-white font-semibold rounded-md outline-none"
           required
         />
         <button
           type="submit"
-          className='w-full p-2 flex items-center justify-center bg-primarycolor text-xl text-slate-900 font-bold rounded-md mt-10'
+          className="w-full p-2 flex items-center justify-center bg-primarycolor text-xl text-slate-900 font-bold rounded-md mt-10"
           disabled={loading}
         >
-          {loading ? 'Creating...' : 'Create Playlist'}
+          {loading ? "Creating..." : "Create Playlist"}
         </button>
       </form>
     </div>

@@ -1,33 +1,33 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem("user");
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
   const [userId, setUserId] = useState(() => {
-    const storedUserId = localStorage.getItem('userId');
+    const storedUserId = localStorage.getItem("userId");
     return storedUserId || null;
   });
 
   const logout = () => {
     setUser(null);
     setUserId(null);
-    localStorage.removeItem('user');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('autoLogin');
-    localStorage.removeItem('userType')
+    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("autoLogin");
+    localStorage.removeItem("userType");
   };
 
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
   useEffect(() => {
-    localStorage.setItem('userId', userId);
+    localStorage.setItem("userId", userId);
   }, [userId]);
 
   return (

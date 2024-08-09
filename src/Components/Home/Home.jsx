@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../Context/AuthContext';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../../../firebase-config';
-import { useNavigate, Link } from 'react-router-dom';
-import LocalLoader from '../Loaders/LocalLoader';
-import { toast } from 'react-toastify';
-import IndianFemale from './IndianFemale';
-import IndianMale from './IndianMale';
-import ForeignMale from './ForeignMale';
-import ForeignFemale from './ForeignFemale';
-import PopularPlaylist from './PopularPlaylist';
-import LastGlobalPlaylist from './LastGlobalPlaylist';
-
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../Context/AuthContext";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../../firebase-config";
+import { useNavigate, Link } from "react-router-dom";
+import LocalLoader from "../Loaders/LocalLoader";
+import { toast } from "react-toastify";
+import IndianFemale from "./IndianFemale";
+import IndianMale from "./IndianMale";
+import ForeignMale from "./ForeignMale";
+import ForeignFemale from "./ForeignFemale";
+import PopularPlaylist from "./PopularPlaylist";
+import LastGlobalPlaylist from "./LastGlobalPlaylist";
 
 const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
   const { user, userId, logout } = useAuth();
@@ -21,21 +20,24 @@ const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
 
   useEffect(() => {
     const showWelcomeToast = () => {
-      if (userType === 'old') {
-        toast.success('Logged in Successfully!', { position: 'top-center', toastId: 'welcome-toast' });
-      } else if (userType === 'new') {
-        toast.success('Signed Up Successfully!', { 
-          position: 'top-center', 
-          toastId: 'welcome-toast',
-          onClose: () => setUserType('old') 
+      if (userType === "old") {
+        toast.success("Logged in Successfully!", {
+          position: "top-center",
+          toastId: "welcome-toast",
+        });
+      } else if (userType === "new") {
+        toast.success("Signed Up Successfully!", {
+          position: "top-center",
+          toastId: "welcome-toast",
+          onClose: () => setUserType("old"),
         });
       }
-      localStorage.setItem('toastShown', 'true');
+      localStorage.setItem("toastShown", "true");
     };
 
-    if (userType && !toast.isActive('welcome-toast')) {
-      const toastShown = localStorage.getItem('toastShown');
-      if (toastShown === 'false') {
+    if (userType && !toast.isActive("welcome-toast")) {
+      const toastShown = localStorage.getItem("toastShown");
+      if (toastShown === "false") {
         showWelcomeToast();
       }
     }
@@ -44,13 +46,13 @@ const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
   useEffect(() => {
     const getFirestoreData = async () => {
       try {
-        const q = query(collection(db, 'users'), where('userId', '==', userId));
+        const q = query(collection(db, "users"), where("userId", "==", userId));
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
           setFirestoreUser(doc.data());
         });
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching user data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -63,9 +65,9 @@ const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
   const handleLogout = async () => {
     try {
       await logout();
-      navigate('/');
+      navigate("/");
     } catch (error) {
-      console.error('Error logging out:', error);
+      console.error("Error logging out:", error);
     }
   };
 
@@ -75,11 +77,15 @@ const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
 
   if (!user) {
     return (
-      <div className='w-full flex flex-col items-center justify-center'>
-        <h1 className='text-3xl text-red-600 font-bold my-10'>"Opps! Access Denied"</h1>
+      <div className="w-full flex flex-col items-center justify-center">
+        <h1 className="text-3xl text-red-600 font-bold my-10">
+          "Opps! Access Denied"
+        </h1>
         <button
-          className='text-xl text-white font-semibold border-2 px-5 py-2 rounded-lg'
-          onClick={() => { navigate('/'); }}
+          className="text-xl text-white font-semibold border-2 px-5 py-2 rounded-lg"
+          onClick={() => {
+            navigate("/");
+          }}
         >
           Goto Login Page
         </button>
@@ -88,13 +94,13 @@ const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
   }
 
   return (
-    <div className='w-full flex flex-col text-white mb-16'>
-      <LastGlobalPlaylist setPlaylistId={setPlaylistId}/>
-      <IndianMale setArtistId={setArtistId}/>
-      <IndianFemale setArtistId={setArtistId}/>
-      <PopularPlaylist setPlaylistId={setPlaylistId}/>
-      <ForeignMale setArtistId={setArtistId}/>
-      <ForeignFemale setArtistId={setArtistId}/>
+    <div className="w-full flex flex-col text-white mb-16">
+      <LastGlobalPlaylist setPlaylistId={setPlaylistId} />
+      <IndianMale setArtistId={setArtistId} />
+      <IndianFemale setArtistId={setArtistId} />
+      <PopularPlaylist setPlaylistId={setPlaylistId} />
+      <ForeignMale setArtistId={setArtistId} />
+      <ForeignFemale setArtistId={setArtistId} />
     </div>
   );
 };

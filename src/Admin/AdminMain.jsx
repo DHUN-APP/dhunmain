@@ -1,43 +1,35 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
-import AdminHome from './Components/Home/AdminHome'
-import NavBar from './Components/NavBar/NavBar';
-import ManageArtists from './Components/ManageArtist/ManageArtists';
-import ManagePlaylists from './Components/ManagePlaylist/ManagePlaylists';
-import ManageUsers from './Components/ManageUser/ManageUsers';
+import React from "react";
+import { useParams } from "react-router-dom";
+import AdminHome from "./Components/Home/AdminHome";
+import NavBar from "./Components/NavBar/NavBar";
+import ManageArtists from "./Components/ManageArtist/ManageArtists";
+import ManagePlaylists from "./Components/ManagePlaylist/ManagePlaylists";
+import ManageUsers from "./Components/ManageUser/ManageUsers";
 
 const AdminMain = () => {
-
-  const {section} = useParams();
+  const { section } = useParams();
 
   const renderComponent = () => {
     switch (section) {
       case "home":
-        return <AdminHome/>;
+        return <AdminHome />;
       case "manageuser":
-        return <ManageUsers/>
+        return <ManageUsers />;
       case "manageartist":
-        return <ManageArtists/>
+        return <ManageArtists />;
       case "manageplaylist":
-        return <ManagePlaylists/>
+        return <ManagePlaylists />;
       default:
         return <AdminHome />;
     }
   };
 
-
   return (
-    <div className='flex flex-col'>
-        <NavBar/>
-        {renderComponent()}
+    <div className="flex flex-col">
+      <NavBar />
+      {renderComponent()}
     </div>
-  )
-}
+  );
+};
 
-export default AdminMain
-
-
-
-
-
-
+export default AdminMain;

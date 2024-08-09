@@ -1,19 +1,18 @@
-import './App.css'
+import "./App.css";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AuthLogin from "./Auth/AuthLogin";
-import CreateProfile from './Components/CreateProfile/CreateProfile';
+import CreateProfile from "./Components/CreateProfile/CreateProfile";
 import { AuthProvider } from "./Context/AuthContext";
 import NavigationError from "./Errors/NavigationError";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Layout from './Layout/Layout';
-import ProtectedRoute from './Context/ProtectedRoute';
-import AdminMain from './Admin/AdminMain';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Layout from "./Layout/Layout";
+import ProtectedRoute from "./Context/ProtectedRoute";
+import AdminMain from "./Admin/AdminMain";
 
 function App() {
-
-  const [userType,setUserType] = useState();
+  const [userType, setUserType] = useState();
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
@@ -28,24 +27,54 @@ function App() {
     <>
       <AuthProvider>
         <Router>
-        {showSplash ? (
+          {showSplash ? (
             <div className="flex flex-col items-center justify-center h-screen bg-black">
               <video
-                  src="/assets/sqrlogo.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  className="w-auto h-screen max-md:w-screen max-md:h-auto"
-                >
-              </video>
+                src="/assets/sqrlogo.mp4"
+                autoPlay
+                loop
+                muted
+                className="w-auto h-screen max-md:w-screen max-md:h-auto"
+              ></video>
             </div>
           ) : (
             <Routes>
-              <Route path="/" element={<AuthLogin setUserType={setUserType} />} />
-              <Route path="/admin/:section" element={<ProtectedRoute><AdminMain/></ProtectedRoute>} />
-              <Route path="/createprofile/:section" element={<ProtectedRoute><CreateProfile /></ProtectedRoute>} />
-              <Route path="/app/:section" element={<ProtectedRoute><Layout userType={userType} setUserType={setUserType} /></ProtectedRoute>} />
-              <Route path="*" element={<ProtectedRoute><NavigationError /></ProtectedRoute>} />
+              <Route
+                path="/"
+                element={<AuthLogin setUserType={setUserType} />}
+              />
+              <Route
+                path="/admin/:section"
+                element={
+                  <ProtectedRoute>
+                    <AdminMain />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/createprofile/:section"
+                element={
+                  <ProtectedRoute>
+                    <CreateProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/app/:section"
+                element={
+                  <ProtectedRoute>
+                    <Layout userType={userType} setUserType={setUserType} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <ProtectedRoute>
+                    <NavigationError />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           )}
         </Router>
@@ -60,11 +89,11 @@ function App() {
           draggable
           pauseOnHover={false}
           theme="light"
-          transition: Bounce
-          />
-    </AuthProvider>
+          transition:Bounce
+        />
+      </AuthProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

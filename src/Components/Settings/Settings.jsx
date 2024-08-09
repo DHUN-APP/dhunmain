@@ -16,8 +16,8 @@ const Settings = () => {
     }
   };
   return (
-    <div className='text-2xl text-textcolor'>
-    <Link to="/" className="p-2 md:w-[400px] w-[90%] bg-slate-400 mt-5 flex items-center justify-center font-semibold text-xl rounded-lg" onClick={handleLogout}>Logout</Link>
+    <div className='text-2xl text-slate-900 w-full flex justify-center'>
+    <Link to="/" className="mt-10 p-2 md:w-[400px] w-[90%] bg-slate-400 flex items-center justify-center font-semibold text-xl rounded-lg" onClick={handleLogout}>Logout</Link>
     </div>
   )
 }

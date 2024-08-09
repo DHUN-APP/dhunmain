@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
-import { FaRegCirclePlay, FaRegCirclePause } from 'react-icons/fa6';
-import { TbRewindBackward10, TbRewindForward10 } from 'react-icons/tb';
-import { RxLoop } from 'react-icons/rx';
-import { BiSolidVolumeMute, BiSolidVolumeFull, BiSolidVolumeLow } from 'react-icons/bi';
-import { VscDebugRestart } from 'react-icons/vsc';
+import { FaRegCirclePlay, FaRegCirclePause } from "react-icons/fa6";
+import { TbRewindBackward10, TbRewindForward10 } from "react-icons/tb";
+import { RxLoop } from "react-icons/rx";
+import {
+  BiSolidVolumeMute,
+  BiSolidVolumeFull,
+  BiSolidVolumeLow,
+} from "react-icons/bi";
+import { VscDebugRestart } from "react-icons/vsc";
 
 const MusicPlayer = ({ songs, initialSongIndex = 0 }) => {
   const [currentSongIndex, setCurrentSongIndex] = useState(initialSongIndex);
@@ -20,20 +24,23 @@ const MusicPlayer = ({ songs, initialSongIndex = 0 }) => {
 
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.src = currentSong?.fileUrl || '';
+      audioRef.current.src = currentSong?.fileUrl || "";
       audioRef.current.volume = volume;
       audioRef.current.muted = isMuted;
       audioRef.current.loop = isLooping;
       setDuration(audioRef.current.duration);
-      
-      audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
-      audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
-      audioRef.current.addEventListener('ended', handleSongEnd);
-      
+
+      audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
+      audioRef.current.addEventListener("loadedmetadata", handleLoadedMetadata);
+      audioRef.current.addEventListener("ended", handleSongEnd);
+
       return () => {
-        audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-        audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
-        audioRef.current.removeEventListener('ended', handleSongEnd);
+        audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+        audioRef.current.removeEventListener(
+          "loadedmetadata",
+          handleLoadedMetadata
+        );
+        audioRef.current.removeEventListener("ended", handleSongEnd);
       };
     }
   }, [currentSong, volume, isMuted, isLooping]);
@@ -54,7 +61,7 @@ const MusicPlayer = ({ songs, initialSongIndex = 0 }) => {
     setCurrentTime(0);
     setIsPlaying(false);
     if (!isLooping && currentSongIndex < songs.length - 1) {
-      setCurrentSongIndex(prevIndex => prevIndex + 1);
+      setCurrentSongIndex((prevIndex) => prevIndex + 1);
     }
   };
 
@@ -113,7 +120,7 @@ const MusicPlayer = ({ songs, initialSongIndex = 0 }) => {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   const playSelectedSong = (index) => {
@@ -128,7 +135,11 @@ const MusicPlayer = ({ songs, initialSongIndex = 0 }) => {
         <h1 className="text-2xl font-bold mb-4 text-white">Now Playing</h1>
         {currentSong && (
           <div className="bg-white p-4 rounded shadow-md w-full">
-            <img src={currentSong.coverImgUrl || 'default-cover.jpg'} alt={currentSong.title} className="w-full h-48 object-cover rounded-md" />
+            <img
+              src={currentSong.coverImgUrl || "default-cover.jpg"}
+              alt={currentSong.title}
+              className="w-full h-48 object-cover rounded-md"
+            />
             <h2 className="text-xl font-semibold mt-2">{currentSong.title}</h2>
             <p className="text-sm text-gray-700">By {currentSong.artist}</p>
           </div>
@@ -148,25 +159,47 @@ const MusicPlayer = ({ songs, initialSongIndex = 0 }) => {
             }}
             className="w-full"
           />
-          <span className="text-white ml-2">-{formatTime(duration - currentTime)}</span>
+          <span className="text-white ml-2">
+            -{formatTime(duration - currentTime)}
+          </span>
         </div>
       </div>
 
       <div className="flex flex-col w-1/3 items-center justify-center space-y-5 max-md:w-full">
         <div className="flex space-x-5">
           <button onClick={toggleLoop}>
-            {isLooping ? <RxLoop size={30} className="text-white" /> : <RxLoop size={30} className="text-gray-500" />}
+            {isLooping ? (
+              <RxLoop size={30} className="text-white" />
+            ) : (
+              <RxLoop size={30} className="text-gray-500" />
+            )}
           </button>
-          <button onClick={handleBackward}><TbRewindBackward10 size={40} className="text-white" /></button>
+          <button onClick={handleBackward}>
+            <TbRewindBackward10 size={40} className="text-white" />
+          </button>
           <button onClick={togglePlayPause}>
-            {isPlaying ? <FaRegCirclePause size={50} className="text-white" /> : <FaRegCirclePlay size={50} className="text-white" />}
+            {isPlaying ? (
+              <FaRegCirclePause size={50} className="text-white" />
+            ) : (
+              <FaRegCirclePlay size={50} className="text-white" />
+            )}
           </button>
-          <button onClick={handleForward}><TbRewindForward10 size={40} className="text-white" /></button>
-          <button onClick={handleRestart}><VscDebugRestart size={30} className="text-white" /></button>
+          <button onClick={handleForward}>
+            <TbRewindForward10 size={40} className="text-white" />
+          </button>
+          <button onClick={handleRestart}>
+            <VscDebugRestart size={30} className="text-white" />
+          </button>
         </div>
         <div className="flex items-center space-x-3">
           <button onClick={toggleMute}>
-            {isMuted ? <BiSolidVolumeMute size={30} className="text-white" /> : (volume > 0.5 ? <BiSolidVolumeFull size={30} className="text-white" /> : <BiSolidVolumeLow size={30} className="text-white" />)}
+            {isMuted ? (
+              <BiSolidVolumeMute size={30} className="text-white" />
+            ) : volume > 0.5 ? (
+              <BiSolidVolumeFull size={30} className="text-white" />
+            ) : (
+              <BiSolidVolumeLow size={30} className="text-white" />
+            )}
           </button>
           <input
             type="range"
@@ -185,9 +218,15 @@ const MusicPlayer = ({ songs, initialSongIndex = 0 }) => {
         <h2 className="text-xl font-semibold text-white mb-2">Playlist</h2>
         <ul className="space-y-2">
           {songs.map((song, index) => (
-            <li key={song.id} className="bg-white p-4 rounded shadow-md flex items-center justify-between cursor-pointer hover:bg-gray-200" onClick={() => playSelectedSong(index)}>
+            <li
+              key={song.id}
+              className="bg-white p-4 rounded shadow-md flex items-center justify-between cursor-pointer hover:bg-gray-200"
+              onClick={() => playSelectedSong(index)}
+            >
               <span>{song.title}</span>
-              {currentSongIndex === index && isPlaying && <span className="text-green-500">Playing</span>}
+              {currentSongIndex === index && isPlaying && (
+                <span className="text-green-500">Playing</span>
+              )}
             </li>
           ))}
         </ul>
