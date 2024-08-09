@@ -69,3 +69,21 @@ Share playlists and favorite tracks with friends, follow other users, and see wh
 - 📖 Multi-Page Layout
 - 🎨 Styled with React-Tailwind and CSS with easy to customize colors
 - 📱 Fully Responsive  
+
+
+# How To Run
+- Open Terminal In Project's Root Folder
+- Run : **npm install**
+- Create A **.env** File In Root Folder
+- Run : **npm run dev**
+- Set The Fields With Your Own Credentials In **.env** File :
+- - VITE_FIREBASE_API_KEY
+- - VITE_FIREBASE_AUTH_DOMAIN
+- - VITE_FIREBASE_PROJECT_ID
+- - VITE_FIREBASE_STORAGE_BUCKET
+- - VITE_FIREBASE_MESSAGING_SENDER_ID
+- - VITE_FIREBASE_APP_ID
+- - VITE_SPOTIFY_ID
+- - VITE_SPOTIFY_SECRET
+- - VITE_ADMIN_MAILID
+- Run : **npm run dev**
