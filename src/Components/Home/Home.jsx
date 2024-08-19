@@ -10,12 +10,11 @@ import IndianMale from "./IndianMale";
 import ForeignMale from "./ForeignMale";
 import ForeignFemale from "./ForeignFemale";
 import PopularPlaylist from "./PopularPlaylist";
-import LastGlobalPlaylist from "./LastGlobalPlaylist";
 
 const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
   const { user, userId, logout } = useAuth();
   const [firestoreUser, setFirestoreUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,14 +61,6 @@ const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
     }
   }, [userId]);
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate("/");
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
-  };
 
   if (isLoading) {
     return <LocalLoader />;
@@ -94,13 +85,12 @@ const Home = ({ userType, setUserType, setArtistId, setPlaylistId }) => {
   }
 
   return (
-    <div className="w-full flex flex-col text-white mb-16">
-      <LastGlobalPlaylist setPlaylistId={setPlaylistId} />
-      <IndianMale setArtistId={setArtistId} />
-      <IndianFemale setArtistId={setArtistId} />
-      <PopularPlaylist setPlaylistId={setPlaylistId} />
-      <ForeignMale setArtistId={setArtistId} />
-      <ForeignFemale setArtistId={setArtistId} />
+    <div className="w-full px-5 flex flex-col text-white mb-16 mt-10">
+      <IndianMale />
+      <IndianFemale />
+      <PopularPlaylist />
+      <ForeignMale />
+      <ForeignFemale />
     </div>
   );
 };

@@ -70,7 +70,7 @@ const EditInfo = () => {
         dob: userData.dob,
         gender: userData.gender,
       });
-      toast.success("User details updated successfully.", {
+      toast.success("Profile updated successfully.", {
         position: "top-center",
       });
       navigate("/app/myprofile");

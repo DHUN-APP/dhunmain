@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { storage, db } from "../../../firebase-config";
 import {
   ref,
@@ -13,7 +13,10 @@ import { toast } from "react-toastify";
 import { TiArrowBack } from "react-icons/ti";
 import { MdDelete } from "react-icons/md";
 
-const EditSong = ({ songId }) => {
+const EditSong = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const songId = queryParams.get("s");
   const [songName, setSongName] = useState("");
   const [singer, setSinger] = useState("");
   const [coverImg, setCoverImg] = useState(null);
@@ -103,7 +106,7 @@ const EditSong = ({ songId }) => {
         position: "top-center",
         toastId: "update-toast",
       });
-      navigate("/app/myprofile");
+      navigate(-1);
     } catch (error) {
       setUploading(false);
       console.error("Error updating song:", error);

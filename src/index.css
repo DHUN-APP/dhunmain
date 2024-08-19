@@ -44,3 +44,10 @@ body {
 .scrollbar-custom {
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
+
+#rhythm-bar {
+  width: 100%;
+  height: 100px;
+  background-color: #222;
+}

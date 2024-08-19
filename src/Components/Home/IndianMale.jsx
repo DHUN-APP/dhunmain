@@ -5,6 +5,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import LocalLoader from "../Loaders/LocalLoader";
+import BoxLoader from "../Loaders/BoxLoader";
 
 const IndianMale = ({ setArtistId }) => {
   const { userId } = useAuth();
@@ -32,7 +33,8 @@ const IndianMale = ({ setArtistId }) => {
         const nonFollowedIndianMaleArtists = allArtists.filter(
           (artist) =>
             !followedArtistIds.has(artist.artistId) &&
-            artist.artistType === "indian_male"
+            artist.artistType === "indian" &&
+            artist.gender === "male"
         );
 
         setArtists(allArtists);
@@ -54,12 +56,11 @@ const IndianMale = ({ setArtistId }) => {
   };
 
   const handleArtistClick = (artistId) => {
-    setArtistId(artistId);
-    navigate(`/app/followingdetails`);
+    navigate(`/app/followingdetails?a=${artistId}`)
   };
 
   if (isLoading) {
-    return <LocalLoader />;
+    return <BoxLoader />;
   }
 
   if (filteredArtists.length === 0) {
@@ -69,7 +70,7 @@ const IndianMale = ({ setArtistId }) => {
   const initialDisplayCount = 5;
 
   return (
-    <div className="p-5 max-md:p-3 flex flex-col">
+    <div className="md:p-5 max-md:my-5 flex flex-col">
       <h1 className="text-3xl max-md:text-xl font-semibold text-textcolor mb-5">
         Popular Indian Male Artists
       </h1>

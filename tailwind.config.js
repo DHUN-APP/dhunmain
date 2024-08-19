@@ -22,10 +22,15 @@ export default {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0.4 },
         },
+        wave: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
       animation: {
         spin: 'spin 1s linear infinite',
         pulse: 'pulse 1.5s ease-in-out infinite',
+        wave: 'wave 1.5s ease-in-out infinite',
       },
     },
   },

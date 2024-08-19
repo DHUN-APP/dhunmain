@@ -13,6 +13,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { TiArrowBack } from "react-icons/ti";
+import { IoIosSearch } from "react-icons/io";
 
 const AddPlaylist = () => {
   const [playlistName, setPlaylistName] = useState("");
@@ -23,6 +24,8 @@ const AddPlaylist = () => {
   const [coverImgProgress, setCoverImgProgress] = useState(0);
   const { userId } = useAuth();
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredSongs, setFilteredSongs] = useState([]);
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -43,12 +46,22 @@ const AddPlaylist = () => {
     fetchSongs();
   }, [userId]);
 
+  useEffect(() => {
+    const filterSongs = () => {
+      const queryLower = searchQuery.toLowerCase();
+      let filtered = songs.filter(
+        (song) =>
+          song.songName.toLowerCase().includes(queryLower) ||
+          song.singer.toLowerCase().includes(queryLower)
+      );
+      setFilteredSongs(filtered);
+    };
+
+    filterSongs();
+  }, [searchQuery,songs]);
+
   const handleUpload = async (e) => {
     e.preventDefault();
-    if (!playlistName || !coverImg || selectedSongs.length === 0) {
-      alert("All fields are required!");
-      return;
-    }
 
     setUploading(true);
 
@@ -75,7 +88,7 @@ const AddPlaylist = () => {
         const song = songs.find((song) => song.songId === songId);
         return {
           songId: song.songId,
-          timestamp: song.timestamp,
+          addedOn: new Date().toISOString() 
         };
       });
 
@@ -86,11 +99,13 @@ const AddPlaylist = () => {
         await updateDoc(userDocRef, {
           myplaylists: arrayUnion({
             playlistId,
-            name: playlistName,
+            playlistName: playlistName,
             coverImgUrl,
             songs: selectedSongsDetails,
-            timestamp: new Date().toISOString(),
-            updatetimestamp: "",
+            createdOn: new Date().toISOString(),
+            updatedOn: new Date().toISOString(),
+            followers:0,
+            views:0
           }),
         });
       } else {
@@ -126,7 +141,7 @@ const AddPlaylist = () => {
   return (
     <div className="p-5">
       <div className="mb-3 flex">
-        <div onClick={() => navigate("/app/myprofile")}>
+        <div onClick={() => navigate(-1)}>
           <TiArrowBack size={40} color="white" />
         </div>
       </div>
@@ -162,31 +177,47 @@ const AddPlaylist = () => {
             </span>
           </div>
         )}
-        <h1 className="text-xl text-textcolor font-semibold">Select Songs:</h1>
-        <div className="flex flex-col gap-2">
-          {songs.map((song) => (
+        <div className="flex items-center space-x-8 md:my-2">
+          <h1 className="text-xl text-textcolor font-semibold">Select Songs ({selectedSongs.length}) :</h1>
+          <div className="ml-5 max-md:ml-3 max-md:my-5 flex items-center justify-center border-primarycolor text-white font-semibold border-b-2">
+                <IoIosSearch size={20} />
+                <input
+                  type="text"
+                  placeholder="Search Song"
+                  className="outline-none bg-slate-800 max-md:bg-primarybg px-1 max-md:w-36"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+          </div>
+        </div>
+        <div className="flex flex-wrap max-md:h-48 max-md:overflow-x-scroll max-md:border-2 max-md:p-1">
+        {filteredSongs.length > 0 ? (
+          filteredSongs.map((song,index) => (
             <label
               key={song.songId}
-              className="flex items-center gap-2 p-2 cursor-pointer rounded-lg bg-slate-600 text-white"
+              className="flex h-fit items-center cursor-pointer rounded-lg bg-slate-600 text-white w-48 max-md:w-full overflow-hidden p-2 m-1 space-x-2"
             >
               <input
                 type="checkbox"
                 value={song.songId}
                 checked={selectedSongs.includes(song.songId)}
                 onChange={(e) => handleCheckboxChange(e.target.value)}
-                className="mr-2"
               />
               <img
                 src={song.coverImgUrl}
                 alt={song.songName}
-                className="w-10 h-10 rounded-full object-cover"
+                className="w-12 h-12 rounded-full object-cover"
               />
-              <div>
-                <div>{song.songName}</div>
-                <div className="text-gray-400">{song.singer}</div>
+              <div className="flex flex-col overflow-hidden">
+                <div className="text-lg truncate font-semibold">{song.songName}</div>
+                <div className=" truncate text-sm">{song.singer}</div>
               </div>
             </label>
-          ))}
+          )))
+
+         : (<p className="text-lg font-semibold text-textcolor">No songs found</p>)
+         }
+          
         </div>
         <button
           type="submit"

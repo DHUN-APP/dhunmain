@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Layout from "./Layout/Layout";
 import ProtectedRoute from "./Context/ProtectedRoute";
 import AdminMain from "./Admin/AdminMain";
+import { SearchProvider } from "./Context/SearchContext";
 
 function App() {
   const [userType, setUserType] = useState();

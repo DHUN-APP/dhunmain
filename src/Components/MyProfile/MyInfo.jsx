@@ -5,6 +5,10 @@ import { db } from "../../../firebase-config";
 import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import LocalLoader from "../Loaders/LocalLoader";
+import { TbPlaylist } from "react-icons/tb";
+import { IoMusicalNote } from "react-icons/io5";
+import { IoPerson } from "react-icons/io5";
+import { GoInfo } from "react-icons/go";
 
 const MyInfo = () => {
   const { user, userId } = useAuth();
@@ -32,6 +36,31 @@ const MyInfo = () => {
     }
   }, [userId]);
 
+  const convertTimestampToDate = (timestamp) => {
+    const date = new Date(timestamp);
+
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const month = date.toLocaleString("default", { month: "long" });
+
+    const getOrdinalSuffix = (day) => {
+      if (day > 3 && day < 21) return "th";
+      switch (day % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    };
+
+    const ordinalSuffix = getOrdinalSuffix(day);
+    return `${day}${ordinalSuffix} ${month}, ${year}`;
+  };
+
   if (isLoading) {
     return <LocalLoader />;
   }
@@ -39,30 +68,27 @@ const MyInfo = () => {
     return <div>No user data found</div>;
   }
 
-  const followingsCount = firestoreUser.artists
-    ? firestoreUser.artists.length
-    : 0;
+  const followingsCount = firestoreUser.artists? firestoreUser.artists.length : 0;
   const songsCount = firestoreUser.mysongs ? firestoreUser.mysongs.length : 0;
-
+  const myPlaylistsCount = firestoreUser.myplaylists ? firestoreUser.myplaylists.length : 0;
+  const followedPlaylistsCount = firestoreUser.playlists ? firestoreUser.playlists.length : 0;
+    
   return (
     <div className="flex w-full p-5">
       {user && (
         <div className="w-full flex max-md:flex-col max-md:items-center">
-          <div className="md:w-1/5 flex justify-center items-center">
-            <div className="bg-slate-300 p-1 rounded-full">
+
+          <div className="md:w-1/4 flex justify-center items-center">
               <img
                 src={firestoreUser.photoURL}
-                height={100}
-                width={100}
                 alt=""
-                className="rounded-full"
+                className="h-40 w-40 rounded-full object-cover border-4 border-white"
               />
-            </div>
           </div>
 
-          <div className="md:w-4/5 flex flex-col">
-            <div className="flex justify-between items-center md:h-2/3 max-md:my-5 ">
-              <div className="text-4xl max-md:text-2xl font-bold flex items-center text-textcolor ">
+          <div className="w-full flex flex-col justify-center">
+            <div className="flex justify-between items-center max-md:mt-5 ">
+              <div className="text-4xl max-md:text-3xl font-bold flex items-center text-textcolor ">
                 {firestoreUser.name}
               </div>
               <div
@@ -73,19 +99,16 @@ const MyInfo = () => {
                 Edit
               </div>
             </div>
-            <div className="text-lg font-bold md:h-1/3 flex gap-3 items-center text-slate-900 text-center">
-              <div className=" bg-slate-400 px-5 py-1 rounded-full">
-                {songsCount} Songs
-              </div>
-              <div className=" bg-slate-400 px-5 py-1 rounded-full">
-                {firestoreUser.playlists ? firestoreUser.myplaylists.length : 0}{" "}
-                PlayLists
-              </div>
-              <div className=" bg-slate-400 px-5 py-1 rounded-full">
-                {followingsCount} Followings
-              </div>
+
+            <div className="text-lg text-textcolor font-semibold mt-3">
+              <div className="flex items-center space-x-5"><IoMusicalNote/><h1>Songs: {songsCount}</h1></div>
+              <div className="flex items-center space-x-5"><TbPlaylist/><h1>Playlists: {myPlaylistsCount+followedPlaylistsCount} (Own: {myPlaylistsCount}, Followed: {followedPlaylistsCount})</h1></div>
+              <div className="flex items-center space-x-5"><IoPerson/><h1>Followings: {followingsCount}</h1></div>
+              <div className="flex items-center space-x-5"><GoInfo/><h1>Joined: {convertTimestampToDate(firestoreUser.createdOn)}</h1></div>
             </div>
+            
           </div>
+
         </div>
       )}
     </div>

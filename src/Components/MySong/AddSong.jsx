@@ -22,21 +22,108 @@ const AddSong = () => {
   const { userId } = useAuth();
   const navigate = useNavigate();
 
+  // const handleUpload = async (e) => {
+  //   e.preventDefault();
+  //   if (!songName || !singer || !coverImg || !songFile) {
+  //     alert("All fields are required!");
+  //     return;
+  //   }
+
+  //   setUploading(true);
+
+  //   try {
+  //     const timestamp = Date.now();
+  //     const coverImgName = `${userId}_cover_${timestamp}`;
+  //     const songFileName = `${userId}_song_${timestamp}`;
+  //     const songId = `${userId}_${timestamp}`;
+
+  //     const coverImgRef = ref(storage, `coverImg/${userId}/${coverImgName}`);
+  //     const coverImgUploadTask = uploadBytesResumable(coverImgRef, coverImg);
+  //     coverImgUploadTask.on("state_changed", (snapshot) => {
+  //       const progress =
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //       setCoverImgProgress(progress);
+  //       setCoverImgUploadedBytes(snapshot.bytesTransferred);
+  //       setCoverImgTotalBytes(snapshot.totalBytes);
+  //     });
+
+  //     await coverImgUploadTask;
+  //     const coverImgUrl = await getDownloadURL(coverImgRef);
+
+  //     const songFileRef = ref(storage, `songs/${userId}/${songFileName}`);
+  //     const songFileUploadTask = uploadBytesResumable(songFileRef, songFile);
+  //     songFileUploadTask.on("state_changed", (snapshot) => {
+  //       const progress =
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //       setSongFileProgress(progress);
+  //       setSongFileUploadedBytes(snapshot.bytesTransferred);
+  //       setSongFileTotalBytes(snapshot.totalBytes);
+  //     });
+
+  //     await songFileUploadTask;
+  //     const songFileUrl = await getDownloadURL(songFileRef);
+
+  //     const userDocRef = doc(db, "users", userId);
+  //     const userDocSnapshot = await getDoc(userDocRef);
+
+  //     if (userDocSnapshot.exists()) {
+  //       await updateDoc(userDocRef, {
+  //         mysongs: arrayUnion({
+  //           songId,
+  //           songName,
+  //           singer,
+  //           coverImgUrl,
+  //           songFileUrl,
+  //           views: 0,
+  //           shares: 0,
+  //           likes:[],
+  //           dislikes:[],
+  //           createdOn: new Date().toISOString(),
+  //           updatedOn: new Date().toISOString(),
+  //         }),
+  //       });
+  //     } else {
+  //       console.error("User document does not exist");
+  //     }
+
+  //     setUploading(false);
+  //     toast.success("Song uploaded successfully", {
+  //       position: "top-center",
+  //       toastId: "welcome-toast",
+  //     });
+  //     setSongName("");
+  //     setSinger("");
+  //     setCoverImg(null);
+  //     setSongFile(null);
+  //     setCoverImgProgress(0);
+  //     setSongFileProgress(0);
+  //     setCoverImgUploadedBytes(0);
+  //     setCoverImgTotalBytes(0);
+  //     setSongFileUploadedBytes(0);
+  //     setSongFileTotalBytes(0);
+  //     navigate("/app/myprofile");
+  //   } catch (error) {
+  //     setUploading(false);
+  //     console.error("Error uploading song:", error);
+  //     alert("Error uploading song. Please try again.");
+  //   }
+  // };
+
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!songName || !singer || !coverImg || !songFile) {
       alert("All fields are required!");
       return;
     }
-
+  
     setUploading(true);
-
+  
     try {
       const timestamp = Date.now();
       const coverImgName = `${userId}_cover_${timestamp}`;
       const songFileName = `${userId}_song_${timestamp}`;
       const songId = `${userId}_${timestamp}`;
-
+  
       const coverImgRef = ref(storage, `coverImg/${userId}/${coverImgName}`);
       const coverImgUploadTask = uploadBytesResumable(coverImgRef, coverImg);
       coverImgUploadTask.on("state_changed", (snapshot) => {
@@ -46,10 +133,10 @@ const AddSong = () => {
         setCoverImgUploadedBytes(snapshot.bytesTransferred);
         setCoverImgTotalBytes(snapshot.totalBytes);
       });
-
+  
       await coverImgUploadTask;
       const coverImgUrl = await getDownloadURL(coverImgRef);
-
+  
       const songFileRef = ref(storage, `songs/${userId}/${songFileName}`);
       const songFileUploadTask = uploadBytesResumable(songFileRef, songFile);
       songFileUploadTask.on("state_changed", (snapshot) => {
@@ -59,28 +146,35 @@ const AddSong = () => {
         setSongFileUploadedBytes(snapshot.bytesTransferred);
         setSongFileTotalBytes(snapshot.totalBytes);
       });
-
+  
       await songFileUploadTask;
-      const songFileUrl = await getDownloadURL(songFileRef);
-
+      const songUrl = await getDownloadURL(songFileRef);
+  
+      const songData = {
+        songId,
+        songName,
+        singer,
+        coverImgUrl,
+        songUrl,
+        views: 0,
+        shares: 0,
+        likes: [],
+        dislikes: [],
+        createdOn: new Date().toISOString(),
+        updatedOn: new Date().toISOString(),
+      };
+  
       const userDocRef = doc(db, "users", userId);
       const userDocSnapshot = await getDoc(userDocRef);
-
+  
       if (userDocSnapshot.exists()) {
         await updateDoc(userDocRef, {
-          mysongs: arrayUnion({
-            songId,
-            songName,
-            singer,
-            coverImgUrl,
-            songFileUrl,
-            timestamp: new Date().toISOString(),
-          }),
+          mysongs: arrayUnion(songData),
         });
       } else {
         console.error("User document does not exist");
       }
-
+  
       setUploading(false);
       toast.success("Song uploaded successfully", {
         position: "top-center",
@@ -93,8 +187,8 @@ const AddSong = () => {
       setCoverImgProgress(0);
       setSongFileProgress(0);
       setCoverImgUploadedBytes(0);
-      setCoverImgTotalBytes(0);
       setSongFileUploadedBytes(0);
+      setCoverImgTotalBytes(0);
       setSongFileTotalBytes(0);
       navigate("/app/myprofile");
     } catch (error) {
@@ -103,6 +197,7 @@ const AddSong = () => {
       alert("Error uploading song. Please try again.");
     }
   };
+  
 
   return (
     <div className="p-5">

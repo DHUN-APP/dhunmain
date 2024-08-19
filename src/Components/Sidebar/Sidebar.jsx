@@ -76,28 +76,7 @@ const Sidebar = ({ setSongId }) => {
             <MdRecentActors size={30} />
             Recents...
           </div>
-          {song && (
-            <div
-              onClick={() => handleClick(song.songId)}
-              className="w-full flex my-5 overflow-auto"
-            >
-              <div className="flex flex-wrap items-center justify-center bg-slate-500 p-2 rounded-l-lg">
-                <img
-                  src={song.coverImgUrl}
-                  alt={song.songName}
-                  className="h-16 w-16 rounded-md"
-                />
-              </div>
-              <div className="flex flex-col px-5  justify-center rounded-r-lg bg-slate-500">
-                <div className="text-slate-900 text-xl font-semibold">
-                  {song.songName}
-                </div>
-                <div className="text-slate-900 text-sm font-semibold">
-                  By {song.singer}
-                </div>
-              </div>
-            </div>
-          )}
+          
         </li>
         <li
           onClick={() => navigate("/app/settings")}

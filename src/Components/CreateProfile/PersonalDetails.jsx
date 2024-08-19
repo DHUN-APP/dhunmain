@@ -43,6 +43,12 @@ const PersonalDetails = () => {
           name,
           dob,
           gender,
+          dislikes: [],
+          likes: [],
+          myplaylists: [],
+          mysongs: [],
+          createdOn: new Date().toISOString(),
+          updatedOn: new Date().toISOString(),
         },
         { merge: true }
       );

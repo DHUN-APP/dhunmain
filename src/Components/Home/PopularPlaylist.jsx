@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IoMusicalNote } from "react-icons/io5";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import { useAuth } from "../../Context/AuthContext";
 import {
@@ -8,14 +7,12 @@ import {
   getDoc,
   collection,
   getDocs,
-  query,
-  where,
 } from "firebase/firestore";
 import { db } from "../../../firebase-config";
+import BoxLoader from "../Loaders/BoxLoader";
 
 const PopularPlaylist = ({ setPlaylistId }) => {
   const { userId } = useAuth();
-  const [allPlaylists, setAllPlaylists] = useState([]);
   const [filteredPlaylists, setFilteredPlaylists] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,22 +22,29 @@ const PopularPlaylist = ({ setPlaylistId }) => {
     const fetchPlaylists = async () => {
       try {
         setIsLoading(true);
+
+        // Fetch the user's document
         const userDocRef = doc(db, "users", userId);
         const userDoc = await getDoc(userDocRef);
         const userData = userDoc.exists() ? userDoc.data() : {};
-        const followedPlaylistIds = new Set(userData.playlists || []);
 
+        // Extract followed playlists from the user's data
+        const followedPlaylists = new Set(
+          (userData.playlists || []).map((playlist) => playlist.playlistId)
+        );
+
+        // Fetch all external playlists
         const allPlaylistsSnapshot = await getDocs(collection(db, "playlists"));
         const allPlaylists = allPlaylistsSnapshot.docs.map((doc) => ({
           ...doc.data(),
           playlistId: doc.id,
         }));
 
+        // Filter playlists to exclude the ones the user is following
         const nonFollowedPlaylists = allPlaylists.filter(
-          (playlist) => !followedPlaylistIds.has(playlist.playlistId)
+          (playlist) => !followedPlaylists.has(playlist.playlistId)
         );
 
-        setAllPlaylists(allPlaylists);
         setFilteredPlaylists(nonFollowedPlaylists);
       } catch (error) {
         console.error("Error fetching playlists: ", error);
@@ -59,41 +63,41 @@ const PopularPlaylist = ({ setPlaylistId }) => {
   };
 
   const handlePlaylistClick = (playlistId) => {
-    setPlaylistId(playlistId);
-    navigate(`/app/globalplaylist`);
+    navigate(`/app/playlist?t=externalplaylist&p=${playlistId}`);
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <BoxLoader/>;
   }
 
   if (filteredPlaylists.length === 0) {
-    return null;
+    return <div>No popular playlists available.</div>;
   }
 
   return (
-    <div className="p-5 max-md:p-3 flex flex-col">
+    <div className="md:p-5 max-md:my-5 flex flex-col">
       <div className="flex items-center gap-3">
         <h1 className="text-3xl max-md:text-xl font-semibold text-textcolor">
           Popular Playlists
         </h1>
       </div>
-      <div className="flex space-x-3 mt-5 overflow-auto flex-wrap">
+      <div className="flex mt-5 overflow-auto flex-wrap">
         {(showAll ? filteredPlaylists : filteredPlaylists.slice(0, 5)).map(
           (playlist) => (
             <div
               key={playlist.playlistId}
               onClick={() => handlePlaylistClick(playlist.playlistId)}
-              className="flex flex-col rounded-md border-2 max-w-24 cursor-pointer mt-3"
+              className="flex rounded-md border-2 w-48 max-md:w-full items-center cursor-pointer m-1"
             >
-              <p className="px-2 text-md font-semibold text-textcolor">
-                {playlist.name}
-              </p>
+              
               <img
                 src={playlist.coverImgUrl || "default-cover.jpg"}
                 alt={`Cover for playlist ${playlist.name}`}
-                className="h-24 w-24 bg-slate-500"
+                className="h-24 w-24 max-md:h-12 max-md:w-12 bg-slate-500 rounded-l-md"
               />
+              <h2 className="px-2 text-md font-semibold text-textcolor">
+                {playlist.playlistName}
+              </h2>
             </div>
           )
         )}

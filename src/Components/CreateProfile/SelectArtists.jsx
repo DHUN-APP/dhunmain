@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { db } from "../../../firebase-config";
-import { collection, getDocs, doc, setDoc } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc, updateDoc,increment } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import UniversalLoader from "../Loaders/UniversalLoader";
 import { UisCheckCircle } from "@iconscout/react-unicons-solid";
@@ -42,6 +42,34 @@ const SelectArtists = () => {
     );
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (selectedArtists.length < 3) {
+  //     toast.error("Select at least 3 artists!", {
+  //       position: "top-center",
+  //       toastId: "welcome-toast",
+  //     });
+  //     return;
+  //   }
+  //   try {
+  //     setIsLoading(true);
+  //     const userDocRef = doc(db, "users", userId);
+  //     await setDoc(
+  //       userDocRef,
+  //       {
+  //         artists: selectedArtists,
+  //       },
+  //       { merge: true }
+  //     );
+  //     navigate("/createprofile/playlist");
+  //   } catch (error) {
+  //     console.error("Error saving artists:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (selectedArtists.length < 3) {
@@ -54,6 +82,8 @@ const SelectArtists = () => {
     try {
       setIsLoading(true);
       const userDocRef = doc(db, "users", userId);
+  
+      // Update the user's document with the selected artists
       await setDoc(
         userDocRef,
         {
@@ -61,13 +91,26 @@ const SelectArtists = () => {
         },
         { merge: true }
       );
+  
+      // Increment the followers count for each selected artist
+      const incrementFollowersPromises = selectedArtists.map((artistId) => {
+        const artistDocRef = doc(db, "artists", artistId);
+        return updateDoc(artistDocRef, {
+          followers: increment(1),
+        });
+      });
+  
+      // Execute all the promises
+      await Promise.all(incrementFollowersPromises);
       navigate("/createprofile/playlist");
     } catch (error) {
       console.error("Error saving artists:", error);
+      toast.error("Failed to save artists.");
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   if (isLoading) {
     return <UniversalLoader />;
@@ -121,3 +164,6 @@ const SelectArtists = () => {
 };
 
 export default SelectArtists;
+
+
+
